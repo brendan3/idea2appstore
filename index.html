@@ -366,7 +366,7 @@
       color: #112e62;
     }
 
-    .portfolio-slot span {
+    .portfolio-slot > span {
       color: #516ea1;
       font-size: 0.88rem;
       font-weight: 700;
@@ -384,14 +384,15 @@
       border-radius: 12px;
       min-height: 130px;
       background: linear-gradient(175deg, rgba(255, 255, 255, 0.74), rgba(214, 229, 255, 0.8));
-      display: grid;
-      place-items: center;
-      color: #365f9e;
-      font-size: 0.73rem;
-      font-weight: 700;
-      text-align: center;
-      padding: 0.55rem;
-      line-height: 1.3;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .shot img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
     }
 
     .app-restaurant .shot {
@@ -674,9 +675,15 @@
           <strong>Restaurant Club</strong>
           <span>Social + events app experience</span>
           <div class="shot-strip">
-            <div class="shot">Screen 01</div>
-            <div class="shot">Screen 02</div>
-            <div class="shot">Screen 03</div>
+            <div class="shot">
+              <img src="assets/portfolio/restaurant-club-1.jpeg" alt="Restaurant Club screenshot 1" loading="lazy" />
+            </div>
+            <div class="shot">
+              <img src="assets/portfolio/restaurant-club-2.jpeg" alt="Restaurant Club screenshot 2" loading="lazy" />
+            </div>
+            <div class="shot">
+              <img src="assets/portfolio/restaurant-club-3.jpeg" alt="Restaurant Club screenshot 3" loading="lazy" />
+            </div>
           </div>
           <a class="portfolio-link" href="mailto:brendanpinder0@gmail.com?subject=Restaurant%20Club%20Demo">Request demo</a>
         </article>
@@ -684,9 +691,15 @@
           <strong>Noizzle</strong>
           <span>Fast, game-like audio challenge app</span>
           <div class="shot-strip">
-            <div class="shot">Screen 01</div>
-            <div class="shot">Screen 02</div>
-            <div class="shot">Screen 03</div>
+            <div class="shot">
+              <img src="assets/portfolio/noizzle-1.png" alt="Noizzle screenshot 1" loading="lazy" />
+            </div>
+            <div class="shot">
+              <img src="assets/portfolio/noizzle-2.PNG" alt="Noizzle screenshot 2" loading="lazy" />
+            </div>
+            <div class="shot">
+              <img src="assets/portfolio/noizzle-3.PNG" alt="Noizzle screenshot 3" loading="lazy" />
+            </div>
           </div>
           <a class="portfolio-link" href="mailto:brendanpinder0@gmail.com?subject=Noizzle%20Demo">Request demo</a>
         </article>
@@ -694,9 +707,15 @@
           <strong>Hyrdate Gate</strong>
           <span>Habit and utility app flow</span>
           <div class="shot-strip">
-            <div class="shot">Screen 01</div>
-            <div class="shot">Screen 02</div>
-            <div class="shot">Screen 03</div>
+            <div class="shot">
+              <img src="assets/portfolio/hydrate-gate-1.png" alt="Hyrdate Gate screenshot 1" loading="lazy" />
+            </div>
+            <div class="shot">
+              <img src="assets/portfolio/hydrate-gate-2.png" alt="Hyrdate Gate screenshot 2" loading="lazy" />
+            </div>
+            <div class="shot">
+              <img src="assets/portfolio/hydrate-gate-3.png" alt="Hyrdate Gate screenshot 3" loading="lazy" />
+            </div>
           </div>
           <a class="portfolio-link" href="mailto:brendanpinder0@gmail.com?subject=Hyrdate%20Gate%20Demo">Request demo</a>
         </article>
