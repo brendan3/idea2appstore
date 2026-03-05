@@ -372,6 +372,17 @@
       font-weight: 700;
     }
 
+    .portfolio-inline-link {
+      color: #214d90;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 800;
+    }
+
+    .portfolio-inline-link:hover {
+      opacity: 0.86;
+    }
+
     .shot-strip {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -439,6 +450,12 @@
       color: #5b6f97;
       font-size: 0.86rem;
       font-weight: 700;
+    }
+
+    .portfolio-note a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .inquiry-wrap {
@@ -634,7 +651,8 @@
           <li>End-to-end development, from an "app idea" to the Apple App Store</li>
           <li>Help along the way for vibe-coded PWA's</li>
           <li>Need to wrap an existing web app for iOS</li>
-          <li>Need to translate to Swift</li>
+          <li>Business who want a mobile app</li>
+          <li>Need translation to Swift</li>
           <li>Need someone with an Apple Developer Account for testing/launch support</li>
         </ul>
         <div class="hero-actions">
@@ -674,7 +692,15 @@
       <div class="portfolio-grid">
         <article class="portfolio-slot app-restaurant">
           <strong>Restaurant Club</strong>
-          <span>Social,Food, Events App: https://apps.apple.com/us/app/restaurant-club/id6756309257</span>
+          <span>
+            Social,Food, Events App:
+            <a
+              class="portfolio-inline-link"
+              href="https://apps.apple.com/us/app/restaurant-club/id6756309257"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Download on the App Store</a>
+          </span>
           <div class="shot-strip">
             <div class="shot">
               <img src="assets/portfolio/restaurant-club-1.jpeg" alt="Restaurant Club screenshot 1" loading="lazy" />
@@ -686,7 +712,6 @@
               <img src="assets/portfolio/restaurant-club-3.jpeg" alt="Restaurant Club screenshot 3" loading="lazy" />
             </div>
           </div>
-          <a class="portfolio-link" href="mailto:brendanpinder0@gmail.com?subject=Restaurant%20Club%20Demo">Request demo</a>
         </article>
         <article class="portfolio-slot app-noizzle">
           <strong>Noizzle</strong>
@@ -721,7 +746,12 @@
           <a class="portfolio-link" href="mailto:brendanpinder0@gmail.com?subject=Hyrdate%20Gate%20Demo">Request demo</a>
         </article>
       </div>
-      <p class="portfolio-note">https://apps.apple.com/us/app/restaurant-club/id6756309257</p>
+      <p class="portfolio-note">
+        Restaurant Club:
+        <a href="https://apps.apple.com/us/app/restaurant-club/id6756309257" target="_blank" rel="noopener noreferrer">
+          https://apps.apple.com/us/app/restaurant-club/id6756309257
+        </a>
+      </p>
     </section>
 
     <section class="section" id="inquiry">
