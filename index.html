@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Idea2Appstore | iOS App Development</title>
+  <meta
+    name="description"
+    content="Idea2Appstore helps founders build polished iOS apps and launch them on the Apple App Store."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #f5f9ff;
+      --surface: rgba(255, 255, 255, 0.75);
+      --surface-solid: #ffffff;
+      --text: #0b1530;
+      --muted: #4f5e85;
+      --accent: #0a84ff;
+      --accent-2: #36c7ff;
+      --line: rgba(13, 31, 71, 0.12);
+      --shadow: 0 20px 60px rgba(12, 38, 92, 0.16);
+      --radius: 22px;
+      --max-width: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(70rem 40rem at 10% -10%, #d2e7ff 0%, transparent 60%),
+        radial-gradient(42rem 24rem at 88% 12%, #d7f5ff 0%, transparent 65%),
+        linear-gradient(180deg, #f8fbff 0%, #f1f7ff 50%, #f8fbff 100%);
+      min-height: 100vh;
+      line-height: 1.45;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(9, 34, 84, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(9, 34, 84, 0.05) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle at center, black 15%, transparent 80%);
+      opacity: 0.32;
+      z-index: 0;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 2rem));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-wrap {
+      padding: 1.25rem 0 2rem;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.4rem 0 1.5rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: "Sora", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.08rem;
+    }
+
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 20px rgba(10, 132, 255, 0.55);
+    }
+
+    .top-cta {
+      text-decoration: none;
+      color: #0a3f87;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(10, 132, 255, 0.22);
+      border-radius: 999px;
+      padding: 0.55rem 0.95rem;
+      font-weight: 700;
+      font-size: 0.92rem;
+      backdrop-filter: blur(8px);
+      transition: 180ms ease;
+    }
+
+    .top-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(10, 132, 255, 0.18);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-copy {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 8px);
+      padding: clamp(1.35rem, 3vw, 2rem);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      animation: rise 600ms ease-out both;
+    }
+
+    .eyebrow {
+      margin: 0;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #40649d;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0.45rem 0 0.35rem;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(2rem, 5.2vw, 4.15rem);
+      line-height: 0.95;
+      letter-spacing: -0.035em;
+      color: #07173d;
+    }
+
+    .subtitle {
+      margin: 0 0 1.1rem;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.2vw, 1.3rem);
+      max-width: 38ch;
+    }
+
+    .service-list {
+      list-style: none;
+      margin: 0 0 1.4rem;
+      padding: 0;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .service-list li {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(11, 56, 132, 0.13);
+      border-radius: 13px;
+      padding: 0.68rem 0.8rem;
+      color: #19396f;
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      align-items: center;
+    }
+
+    .primary-btn {
+      font-family: "Sora", sans-serif;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: #ffffff;
+      background: linear-gradient(128deg, #0071ff, #00b4ff);
+      border-radius: 14px;
+      border: none;
+      padding: 0.95rem 1.35rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      box-shadow: 0 18px 36px rgba(11, 107, 255, 0.36);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 24px 40px rgba(11, 107, 255, 0.4);
+    }
+
+    .micro-note {
+      margin: 0;
+      color: #4e6290;
+      font-size: 0.89rem;
+      font-weight: 600;
+    }
+
+    .hero-visual {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 420px;
+      animation: rise 700ms ease-out both;
+    }
+
+    .phone {
+      position: relative;
+      width: min(84vw, 280px);
+      aspect-ratio: 9 / 19;
+      border-radius: 34px;
+      background: linear-gradient(175deg, #fefeff, #f6f8ff 40%, #ebf4ff 100%);
+      border: 1px solid rgba(18, 57, 130, 0.2);
+      box-shadow:
+        0 26px 52px rgba(24, 62, 133, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      overflow: hidden;
+      padding: 1rem 0.9rem;
+      z-index: 2;
+    }
+
+    .phone::before {
+      content: "";
+      position: absolute;
+      width: 38%;
+      height: 3%;
+      left: 31%;
+      top: 0.9%;
+      border-radius: 999px;
+      background: #0f1f43;
+      opacity: 0.55;
+    }
+
+    .screen-card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(10, 34, 82, 0.08);
+      border-radius: 14px;
+      padding: 0.85rem 0.8rem;
+      margin-bottom: 0.65rem;
+      box-shadow: 0 10px 20px rgba(36, 77, 155, 0.12);
+    }
+
+    .screen-card strong {
+      display: block;
+      font-family: "Sora", sans-serif;
+      font-size: 0.86rem;
+      margin-bottom: 0.2rem;
+      letter-spacing: -0.01em;
+    }
+
+    .screen-card span {
+      color: #4d6394;
+      font-size: 0.79rem;
+      font-weight: 600;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.2rem;
+    }
+
+    .pill {
+      font-size: 0.68rem;
+      border-radius: 999px;
+      padding: 0.25rem 0.55rem;
+      background: #eaf4ff;
+      color: #28539a;
+      border: 1px solid #d2e6ff;
+      font-weight: 700;
+    }
+
+    .glow {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(2px);
+      z-index: 1;
+    }
+
+    .glow.one {
+      width: 180px;
+      height: 180px;
+      top: 5%;
+      left: 8%;
+      background: radial-gradient(circle, rgba(31, 185, 255, 0.45), transparent 68%);
+      animation: driftA 8s ease-in-out infinite alternate;
+    }
+
+    .glow.two {
+      width: 210px;
+      height: 210px;
+      right: 2%;
+      bottom: 0;
+      background: radial-gradient(circle, rgba(37, 120, 255, 0.38), transparent 68%);
+      animation: driftB 10s ease-in-out infinite alternate;
+    }
+
+    .section {
+      margin-top: 3.5rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(1.2rem, 3vw, 2rem);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      animation: rise 700ms ease-out both;
+    }
+
+    .section h2 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      letter-spacing: -0.02em;
+    }
+
+    .section p {
+      margin: 0.5rem 0 0;
+      color: var(--muted);
+      max-width: 70ch;
+      font-weight: 500;
+    }
+
+    .portfolio-grid {
+      margin-top: 1.2rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+
+    .portfolio-slot {
+      min-height: 260px;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.82), rgba(233, 243, 255, 0.72));
+      border: 1px dashed rgba(38, 92, 186, 0.42);
+      border-radius: 16px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0.7rem;
+    }
+
+    .portfolio-slot strong {
+      font-family: "Sora", sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: -0.01em;
+      color: #112e62;
+    }
+
+    .portfolio-slot span {
+      color: #516ea1;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .shot-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.5rem;
+      margin-top: 0.1rem;
+    }
+
+    .shot {
+      border: 1px solid rgba(35, 87, 180, 0.22);
+      border-radius: 12px;
+      min-height: 130px;
+      background: linear-gradient(175deg, rgba(255, 255, 255, 0.74), rgba(214, 229, 255, 0.8));
+      display: grid;
+      place-items: center;
+      color: #365f9e;
+      font-size: 0.73rem;
+      font-weight: 700;
+      text-align: center;
+      padding: 0.55rem;
+      line-height: 1.3;
+    }
+
+    .app-restaurant .shot {
+      background: linear-gradient(175deg, rgba(255, 250, 245, 0.9), rgba(255, 230, 210, 0.86));
+      border-color: rgba(228, 126, 72, 0.32);
+      color: #9f4d1f;
+    }
+
+    .app-noizzle .shot {
+      background: linear-gradient(175deg, rgba(241, 253, 255, 0.92), rgba(215, 247, 251, 0.86));
+      border-color: rgba(84, 190, 201, 0.35);
+      color: #246f77;
+    }
+
+    .app-hyrdate .shot {
+      background: linear-gradient(175deg, rgba(239, 246, 255, 0.92), rgba(214, 231, 255, 0.87));
+      border-color: rgba(106, 163, 250, 0.35);
+      color: #255fa7;
+    }
+
+    .portfolio-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.2rem;
+      min-height: 40px;
+      border-radius: 10px;
+      border: 1px solid rgba(38, 96, 190, 0.22);
+      background: rgba(255, 255, 255, 0.82);
+      text-decoration: none;
+      color: #214d90;
+      font-weight: 800;
+      font-size: 0.83rem;
+      transition: 170ms ease;
+    }
+
+    .portfolio-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(32, 79, 154, 0.17);
+    }
+
+    .portfolio-note {
+      margin-top: 0.7rem;
+      color: #5b6f97;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .inquiry-wrap {
+      margin-top: 1.2rem;
+      border: 1px solid rgba(17, 70, 154, 0.14);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.72);
+      padding: 1rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .field {
+      display: grid;
+      gap: 0.38rem;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      font-size: 0.84rem;
+      color: #355b99;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid rgba(35, 87, 180, 0.22);
+      border-radius: 10px;
+      padding: 0.68rem 0.75rem;
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: #102f64;
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .field textarea {
+      min-height: 138px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: 2px solid rgba(10, 132, 255, 0.28);
+      border-color: rgba(10, 132, 255, 0.48);
+    }
+
+    .form-actions {
+      margin-top: 0.85rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      align-items: center;
+    }
+
+    .secondary-btn {
+      min-height: 46px;
+      border: 1px solid rgba(18, 82, 177, 0.26);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.86);
+      color: #224a8a;
+      font-family: "Sora", sans-serif;
+      font-weight: 700;
+      padding: 0.7rem 1rem;
+      cursor: pointer;
+      transition: 170ms ease;
+    }
+
+    .secondary-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(27, 83, 171, 0.14);
+    }
+
+    .small-print {
+      margin: 0;
+      color: #5f7297;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .client-placeholder {
+      margin-top: 1rem;
+      min-height: 78px;
+      border: 1px dashed rgba(22, 77, 173, 0.35);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.65);
+      display: grid;
+      place-items: center;
+      color: #2f568f;
+      font-weight: 700;
+      font-size: 0.92rem;
+      text-align: center;
+      padding: 0.65rem;
+    }
+
+    footer {
+      padding: 2rem 0 2.2rem;
+      text-align: center;
+      color: #486293;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes driftA {
+      from {
+        transform: translateY(0) translateX(0);
+      }
+      to {
+        transform: translateY(24px) translateX(10px);
+      }
+    }
+
+    @keyframes driftB {
+      from {
+        transform: translateY(0) translateX(0);
+      }
+      to {
+        transform: translateY(-20px) translateX(-16px);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: 340px;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        margin-top: 2rem;
+      }
+
+      .topbar {
+        padding-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container hero-wrap">
+    <header class="topbar">
+      <a class="brand" href="#">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>Idea2Appstore</span>
+      </a>
+      <a class="top-cta" href="mailto:brendanpinder0@gmail.com">Contact</a>
+    </header>
+
+    <section class="hero">
+      <article class="hero-copy">
+        <p class="eyebrow">iOS Product Partner</p>
+        <h1>Idea2Appstore</h1>
+        <p class="subtitle">Your Idea in APP form</p>
+        <ul class="service-list">
+          <li>-End-to-end development, from an "app idea" to the Apple app store</li>
+          <li>-help along the way for vibe-coded PWA's</li>
+          <li>-just need to wrap or translate to swift</li>
+          <li>-just need someone with an Apple developer account</li>
+        </ul>
+        <div class="hero-actions">
+          <a class="primary-btn" href="mailto:brendanpinder0@gmail.com">Book Your FREE Consult</a>
+          <p class="micro-note">Replies go directly to brendanpinder0@gmail.com</p>
+        </div>
+      </article>
+
+      <aside class="hero-visual" aria-hidden="true">
+        <div class="glow one"></div>
+        <div class="glow two"></div>
+        <div class="phone">
+          <div class="screen-card">
+            <strong>Idea Validation</strong>
+            <span>Scope, UX flow, monetization, roadmap</span>
+          </div>
+          <div class="screen-card">
+            <strong>iOS Build + Launch</strong>
+            <span>Swift implementation and App Store submission</span>
+          </div>
+          <div class="screen-card">
+            <strong>Support + Iteration</strong>
+            <span>Analytics-driven updates and performance tuning</span>
+            <div class="pill-row">
+              <span class="pill">Swift</span>
+              <span class="pill">TestFlight</span>
+              <span class="pill">App Store</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="portfolio">
+      <h2>Portfolio</h2>
+      <p>Selected iOS projects. I can share additional details and case studies during your free consult.</p>
+      <div class="portfolio-grid">
+        <article class="portfolio-slot app-restaurant">
+          <strong>Restaurant Club</strong>
+          <span>Social + events app experience</span>
+          <div class="shot-strip">
+            <div class="shot">Screen 01</div>
+            <div class="shot">Screen 02</div>
+            <div class="shot">Screen 03</div>
+          </div>
+          <a class="portfolio-link" href="mailto:brendanpinder0@gmail.com?subject=Restaurant%20Club%20Demo">Request demo</a>
+        </article>
+        <article class="portfolio-slot app-noizzle">
+          <strong>Noizzle</strong>
+          <span>Fast, game-like audio challenge app</span>
+          <div class="shot-strip">
+            <div class="shot">Screen 01</div>
+            <div class="shot">Screen 02</div>
+            <div class="shot">Screen 03</div>
+          </div>
+          <a class="portfolio-link" href="mailto:brendanpinder0@gmail.com?subject=Noizzle%20Demo">Request demo</a>
+        </article>
+        <article class="portfolio-slot app-hyrdate">
+          <strong>Hyrdate Gate</strong>
+          <span>Habit and utility app flow</span>
+          <div class="shot-strip">
+            <div class="shot">Screen 01</div>
+            <div class="shot">Screen 02</div>
+            <div class="shot">Screen 03</div>
+          </div>
+          <a class="portfolio-link" href="mailto:brendanpinder0@gmail.com?subject=Hyrdate%20Gate%20Demo">Request demo</a>
+        </article>
+      </div>
+      <p class="portfolio-note">App Store links can be dropped in here as soon as each listing is live.</p>
+    </section>
+
+    <section class="section" id="inquiry">
+      <h2>Quick Inquiry</h2>
+      <p>Prefer to type the idea first? Send a draft straight to my inbox below.</p>
+      <div class="inquiry-wrap">
+        <form id="inquiry-form">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@email.com" required />
+            </div>
+            <div class="field">
+              <label for="project-type">Project Type</label>
+              <select id="project-type" name="project-type">
+                <option>New iOS app from scratch</option>
+                <option>PWA to native iOS</option>
+                <option>Swift translation/wrap</option>
+                <option>App Store launch support</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="timeline">Target Timeline</label>
+              <input id="timeline" name="timeline" type="text" placeholder="e.g. MVP in 6-8 weeks" />
+            </div>
+            <div class="field full">
+              <label for="idea">Your App Idea</label>
+              <textarea id="idea" name="idea" placeholder="What are you building? Who is it for?"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="secondary-btn" type="submit">Send Inquiry Draft</button>
+            <p class="small-print">This opens your email app with the details pre-filled.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="clients-placeholder">
+      <h2>Who We've Worked With</h2>
+      <p>This section is reserved for future logos and partner names.</p>
+      <div class="client-placeholder">Placeholder only for now.</div>
+    </section>
+
+    <footer>
+      Ready to launch your iOS app? <a href="mailto:brendanpinder0@gmail.com">Book Your FREE Consult</a>
+    </footer>
+  </div>
+  <script>
+    const form = document.getElementById("inquiry-form");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const projectType = document.getElementById("project-type").value.trim();
+      const timeline = document.getElementById("timeline").value.trim();
+      const idea = document.getElementById("idea").value.trim();
+
+      const subject = "New Idea2Appstore Inquiry";
+      const body = [
+        "Name: " + name,
+        "Email: " + email,
+        "Project Type: " + projectType,
+        "Target Timeline: " + (timeline || "Not specified"),
+        "",
+        "App Idea:",
+        idea || "Not provided"
+      ].join("\n");
+
+      window.location.href =
+        "mailto:brendanpinder0@gmail.com?subject=" +
+        encodeURIComponent(subject) +
+        "&body=" +
+        encodeURIComponent(body);
+    });
+  </script>
+</body>
+</html>
