@@ -6,6 +6,10 @@ Single-page, iOS-style marketing site for `idea2appstore.com`.
 
 - `index.html` - full landing page
 - `Dockerfile` - static hosting image for Railway (nginx)
+- `index.html` includes:
+  - Primary mailto CTA button
+  - Portfolio cards for Restaurant Club, Noizzle, and Hyrdate Gate
+  - Quick Inquiry form that drafts an email to `brendanpinder0@gmail.com`
 
 ## Local Preview
 
@@ -16,6 +20,29 @@ python3 -m http.server 8080
 ```
 
 Then open `http://localhost:8080`.
+
+## GitHub Push (for Railway)
+
+This folder is already initialized as its own git repo with an initial commit.
+
+If your GitHub auth needs refresh:
+
+```bash
+gh auth login -h github.com
+```
+
+Create and push a new repo with CLI:
+
+```bash
+gh repo create idea2appstore --public --source=. --remote=origin --push
+```
+
+Or create an empty repo on GitHub web, then run:
+
+```bash
+git remote add origin https://github.com/<your-user>/idea2appstore.git
+git push -u origin main
+```
 
 ## Deploy on Railway
 
