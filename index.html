@@ -4,6 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Idea2Appstore | iOS App Development</title>
+  <link
+    rel="icon"
+    type="image/png"
+    href="assets/i2a-logo.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="assets/i2a-logo.png"
+  />
   <meta
     name="description"
     content="Idea2Appstore helps founders build polished iOS apps and launch them on the Apple App Store."
@@ -79,6 +88,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 0.4rem 0 1.5rem;
+      position: relative;
     }
 
     .brand {
@@ -91,6 +101,17 @@
       color: var(--text);
       text-decoration: none;
       font-size: 1.08rem;
+    }
+
+    .topbar-logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: 0 10px 24px rgba(83, 46, 185, 0.35);
     }
 
     .brand-dot {
@@ -313,6 +334,20 @@
       bottom: 0;
       background: radial-gradient(circle, rgba(37, 120, 255, 0.38), transparent 68%);
       animation: driftB 10s ease-in-out infinite alternate;
+    }
+
+    .phone-logo {
+      margin-top: 0.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-logo img {
+      max-width: 58%;
+      height: auto;
+      border-radius: 20%;
+      box-shadow: 0 10px 24px rgba(129, 88, 255, 0.32);
     }
 
     .section {
@@ -639,6 +674,11 @@
         <span class="brand-dot" aria-hidden="true"></span>
         <span>Idea2Appstore</span>
       </a>
+      <img
+        src="assets/i2a-logo.png"
+        alt="Idea2Appstore logo"
+        class="topbar-logo"
+      />
       <a class="top-cta" href="mailto:brendanpinder0@gmail.com">Contact</a>
     </header>
 
@@ -681,6 +721,9 @@
               <span class="pill">TestFlight</span>
               <span class="pill">App Store</span>
             </div>
+          </div>
+          <div class="phone-logo">
+            <img src="assets/i2a-logo.png" alt="Idea2Appstore logo icon" />
           </div>
         </div>
       </aside>
