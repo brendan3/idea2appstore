@@ -1,0 +1,359 @@
+<!--
+To update the stats, edit beer_stats.json and change the values of current_count, average_per_day, or projected_total.
+Deploy the updated JSON and the progress bar and figures will update on page reload.
+To change the photo, replace assets/beertracker/austin.jpg with a new image and keep the filename the same.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Austin Beer Tracker 2026 | Road to 1500</title>
+  <meta
+    name="description"
+    content="Funny 2026 beer tracker showing current count, average per day, projected total, and progress to 1500."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #f5f9ff;
+      --surface: rgba(255, 255, 255, 0.75);
+      --surface-solid: #ffffff;
+      --text: #0b1530;
+      --muted: #4f5e85;
+      --accent: #0a84ff;
+      --accent-2: #36c7ff;
+      --line: rgba(13, 31, 71, 0.12);
+      --shadow: 0 20px 60px rgba(12, 38, 92, 0.16);
+      --radius: 22px;
+      --max-width: 980px;
+      --good: #18a45f;
+      --good-soft: #d7f4e4;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(70rem 40rem at 10% -10%, #d2e7ff 0%, transparent 60%),
+        radial-gradient(42rem 24rem at 88% 12%, #d7f5ff 0%, transparent 65%),
+        linear-gradient(180deg, #f8fbff 0%, #f1f7ff 50%, #f8fbff 100%);
+      min-height: 100vh;
+      line-height: 1.45;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 2rem 0 2.5rem;
+    }
+
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 4px);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      padding: clamp(1.1rem, 2.5vw, 1.7rem);
+    }
+
+    .title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      letter-spacing: -0.03em;
+      line-height: 1.06;
+      font-size: clamp(1.9rem, 4.8vw, 3rem);
+    }
+
+    .year-badge {
+      border-radius: 999px;
+      border: 1px solid rgba(12, 65, 152, 0.2);
+      background: rgba(255, 255, 255, 0.82);
+      color: #1f4f95;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 0.32rem 0.7rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .photo-wrap {
+      border-radius: 16px;
+      border: 1px solid rgba(18, 61, 143, 0.2);
+      overflow: hidden;
+      background: #dfe8ff;
+      margin-bottom: 0.95rem;
+      max-height: 480px;
+    }
+
+    .photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .subline {
+      margin: 0 0 0.9rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.65rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .metric {
+      border-radius: 12px;
+      border: 1px solid rgba(19, 75, 170, 0.18);
+      background: rgba(255, 255, 255, 0.86);
+      padding: 0.7rem 0.75rem;
+    }
+
+    .metric-label {
+      color: #4b6190;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      margin: 0 0 0.2rem;
+    }
+
+    .metric-value {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      color: #123b83;
+      font-size: clamp(1.15rem, 2.8vw, 1.5rem);
+      letter-spacing: -0.015em;
+      line-height: 1.1;
+    }
+
+    .progress-wrap {
+      border-radius: 12px;
+      border: 1px solid rgba(17, 73, 166, 0.18);
+      background: rgba(255, 255, 255, 0.84);
+      padding: 0.8rem;
+    }
+
+    .progress-title {
+      margin: 0 0 0.52rem;
+      color: #284f8f;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+    }
+
+    .progress-track {
+      width: 100%;
+      min-height: 28px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(19, 72, 163, 0.15);
+      background: #e5edf8;
+      position: relative;
+    }
+
+    .progress-fill {
+      width: 0%;
+      min-height: 28px;
+      background: linear-gradient(120deg, #11a65a, #39ca80);
+      transition: width 300ms ease;
+    }
+
+    .progress-meta {
+      margin-top: 0.42rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      color: #36558d;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .fun-note {
+      margin: 0.72rem 0 0;
+      border-radius: 11px;
+      border: 1px solid rgba(22, 154, 96, 0.25);
+      background: var(--good-soft);
+      color: #135838;
+      padding: 0.55rem 0.68rem;
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .error {
+      margin-top: 0.9rem;
+      border-radius: 10px;
+      border: 1px solid rgba(196, 54, 54, 0.22);
+      background: rgba(237, 72, 72, 0.08);
+      color: #7e1f2f;
+      padding: 0.65rem 0.75rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: none;
+    }
+
+    footer {
+      margin-top: 0.95rem;
+      color: #4c6190;
+      font-size: 0.82rem;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    @media (max-width: 760px) {
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="hero-card">
+      <div class="title-row">
+        <h1>Beer Analytics - Road to 1500</h1>
+        <span class="year-badge">2026 Tracker</span>
+      </div>
+
+      <div class="photo-wrap">
+        <img src="/assets/beertracker/austin.jpg" alt="Austin enjoying a Bud Light" />
+      </div>
+
+      <p class="subline">Serious metrics. Extremely unserious mission.</p>
+
+      <div class="metrics-grid">
+        <article class="metric">
+          <p class="metric-label">Average Per Day</p>
+          <p class="metric-value" id="average-per-day">--</p>
+        </article>
+        <article class="metric">
+          <p class="metric-label">Projected Total</p>
+          <p class="metric-value" id="projected-total">--</p>
+        </article>
+        <article class="metric">
+          <p class="metric-label">Current Count</p>
+          <p class="metric-value" id="current-count">--</p>
+        </article>
+      </div>
+
+      <div class="progress-wrap">
+        <p class="progress-title">Progress to Goal</p>
+        <div class="progress-track" aria-label="Beer goal progress">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="progress-meta">
+          <span id="progress-label">-- / -- beers</span>
+          <span id="progress-percent">--%</span>
+        </div>
+      </div>
+
+      <p class="fun-note" id="fun-note">Loading hydration intelligence...</p>
+      <p class="error" id="load-error">Could not load beer_stats.json. Check that the file exists and try refreshing.</p>
+    </section>
+
+    <footer>Update count in <code>beer_stats.json</code> and reload the page.</footer>
+  </main>
+
+  <script>
+    function getDaysIntoYear(date) {
+      const now = date || new Date();
+      const start = new Date(now.getFullYear(), 0, 0);
+      const ms = now - start;
+      return Math.floor(ms / 86400000);
+    }
+
+    function setText(id, value) {
+      const node = document.getElementById(id);
+      if (node) {
+        node.textContent = value;
+      }
+    }
+
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
+
+    async function loadBeerStats() {
+      const errorNode = document.getElementById("load-error");
+      try {
+        const response = await fetch("/beer_stats.json", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error("Fetch failed with status " + response.status);
+        }
+
+        const stats = await response.json();
+        const currentCount = Number(stats.current_count) || 0;
+        const goal = Number(stats.goal) || 1500;
+        const projectedTotal = Number(stats.projected_total) || 0;
+
+        const daysIntoYear = getDaysIntoYear(new Date());
+        const averagePerDay = daysIntoYear > 0 ? currentCount / daysIntoYear : 0;
+        const averagePerDayDisplay = Math.floor(averagePerDay * 100) / 100;
+
+        const progressPercent = goal > 0 ? clamp((currentCount / goal) * 100, 0, 100) : 0;
+
+        setText("average-per-day", averagePerDayDisplay.toFixed(2));
+        setText("projected-total", String(projectedTotal));
+        setText("current-count", String(currentCount));
+        setText("progress-label", currentCount + " / " + goal + " beers");
+        setText("progress-percent", progressPercent.toFixed(1) + "%");
+
+        const fill = document.getElementById("progress-fill");
+        if (fill) {
+          fill.style.width = progressPercent.toFixed(2) + "%";
+        }
+
+        const funNode = document.getElementById("fun-note");
+        if (funNode) {
+          const left = Math.max(goal - currentCount, 0);
+          funNode.textContent =
+            "Day " + daysIntoYear + " of the year. Pace: " + averagePerDayDisplay.toFixed(2) + "/day. " +
+            left + " beers to go.";
+        }
+
+        if (errorNode) {
+          errorNode.style.display = "none";
+        }
+      } catch (error) {
+        if (errorNode) {
+          errorNode.style.display = "block";
+        }
+      }
+    }
+
+    loadBeerStats();
+  </script>
+</body>
+</html>
