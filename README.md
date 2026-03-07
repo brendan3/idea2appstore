@@ -1,25 +1,49 @@
 # Idea2Appstore Landing Page
 
-Single-page, iOS-style marketing site for `idea2appstore.com`.
+Landing pages + beer tracker for `idea2appstore.com`.
 
 ## Files
 
-- `index.html` - full landing page
-- `Dockerfile` - static hosting image for Railway (nginx)
-- `index.html` includes:
-  - Primary mailto CTA button
-  - Portfolio cards for Restaurant Club, Noizzle, and Hyrdate Gate
-  - Quick Inquiry form that drafts an email to `brendanpinder0@gmail.com`
+- `index.html` - main landing page
+- `draft/index.html` - secondary draft landing page at `/draft`
+- `austinbeertracker2026roadto1500.html` - tracker page at `/austinbeertracker2026roadto1500`
+- `austinbeertracker2026roadto1500_current_count.html` - updater page at `/austinbeertracker2026roadto1500/current_count`
+- `beer_stats.json` - fallback stats source
+- `server.js` - Node server that serves static pages + tracker API
+- `Dockerfile` - Railway container build
 
 ## Local Preview
 
 From this folder:
 
 ```bash
-python3 -m http.server 8080
+npm install
+npm start
 ```
 
 Then open `http://localhost:8080`.
+
+## Beer Tracker API
+
+- `GET /api/beer-stats` returns `current_count`, `average_per_day`, `projected_total`, `goal`, and `days_into_year`.
+- `POST /api/beer-stats/current-count` updates `current_count`.
+
+JSON body for updates:
+
+```json
+{
+  "current_count": 401
+}
+```
+
+Optional security:
+
+- Set `BEER_TRACKER_ADMIN_KEY` and include it as `x-admin-key` header on update requests.
+
+Optional persistent storage:
+
+- If `DATABASE_URL` is set (Railway Postgres), updates are stored in Postgres.
+- If `DATABASE_URL` is not set, updates are written to `beer_stats.json`.
 
 ## GitHub Push (for Railway)
 
@@ -48,11 +72,16 @@ git push -u origin main
 
 1. Push this folder to GitHub.
 2. In Railway, create a new project and connect that repo.
-3. Railway will detect the root `Dockerfile` and build from it.
+3. Railway will build from the root `Dockerfile`.
 4. In your service settings, use Networking -> Public Networking:
    - Generate a Railway domain first (for testing)
    - Add your custom domain (`idea2appstore.com`)
 5. Railway will give you a target value like `xxxx.up.railway.app` for DNS.
+
+## Railway Variables
+
+- `DATABASE_URL` (recommended): add Railway Postgres and reference this variable.
+- `BEER_TRACKER_ADMIN_KEY` (recommended): protects count updates.
 
 ## Namecheap DNS (BasicDNS)
 

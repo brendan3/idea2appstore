@@ -1,0 +1,17 @@
+{
+  "name": "idea2appstore-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Idea2Appstore landing pages and beer tracker",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.13.3"
+  }
+}

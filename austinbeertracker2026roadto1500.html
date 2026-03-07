@@ -1,6 +1,7 @@
 <!--
 To update the stats, edit beer_stats.json and change the values of current_count, average_per_day, or projected_total.
 Deploy the updated JSON and the progress bar and figures will update on page reload.
+You can also update current_count using /austinbeertracker2026roadto1500/current_count.
 To change the photo, replace assets/beertracker/austin.jpg with a new image and keep the filename the same.
 -->
 <!DOCTYPE html>
@@ -285,10 +286,10 @@ To change the photo, replace assets/beertracker/austin.jpg with a new image and 
         <img src="/assets/beertracker/austin.jpg" alt="Austin enjoying a Bud Light" />
       </div>
       <p class="subline">Barhawk in his natural habitat</p>
-      <p class="error" id="load-error">Could not load beer_stats.json. Check that the file exists and try refreshing.</p>
+      <p class="error" id="load-error">Could not load beer stats. Try refreshing in a few seconds.</p>
     </section>
 
-    <footer>Update count in <code>beer_stats.json</code> and reload the page.</footer>
+    <footer>Update count at <code>/austinbeertracker2026roadto1500/current_count</code> or edit <code>beer_stats.json</code>.</footer>
   </main>
 
   <script>
@@ -313,7 +314,7 @@ To change the photo, replace assets/beertracker/austin.jpg with a new image and 
     async function loadBeerStats() {
       const errorNode = document.getElementById("load-error");
       try {
-        const response = await fetch("/beer_stats.json", { cache: "no-store" });
+        const response = await fetch("/api/beer-stats", { cache: "no-store" });
         if (!response.ok) {
           throw new Error("Fetch failed with status " + response.status);
         }

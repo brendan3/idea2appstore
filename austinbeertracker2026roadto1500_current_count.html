@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Road to 1500 | Update Current Count</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --surface: rgba(255, 255, 255, 0.78);
+      --text: #0b1530;
+      --muted: #4f5e85;
+      --line: rgba(13, 31, 71, 0.12);
+      --shadow: 0 20px 60px rgba(12, 38, 92, 0.16);
+      --radius: 22px;
+      --accent: #0a84ff;
+      --accent-2: #36c7ff;
+      --success-bg: #d7f4e4;
+      --success-text: #135838;
+      --error-bg: rgba(237, 72, 72, 0.12);
+      --error-text: #7e1f2f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(70rem 40rem at 10% -10%, #d2e7ff 0%, transparent 60%),
+        radial-gradient(42rem 24rem at 88% 12%, #d7f5ff 0%, transparent 65%),
+        linear-gradient(180deg, #f8fbff 0%, #f1f7ff 50%, #f8fbff 100%);
+      min-height: 100vh;
+      line-height: 1.45;
+    }
+
+    .container {
+      width: min(760px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 2.2rem 0;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 4px);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      padding: clamp(1rem, 2.5vw, 1.55rem);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      line-height: 1.03;
+      letter-spacing: -0.03em;
+    }
+
+    .subline {
+      margin: 0.52rem 0 1rem;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .current-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(22, 75, 163, 0.2);
+      background: rgba(255, 255, 255, 0.88);
+      color: #1e4a90;
+      padding: 0.34rem 0.72rem;
+      font-size: 0.86rem;
+      font-weight: 800;
+      margin-bottom: 0.95rem;
+    }
+
+    form {
+      display: grid;
+      gap: 0.66rem;
+    }
+
+    label {
+      color: #365a96;
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid rgba(35, 87, 180, 0.22);
+      border-radius: 10px;
+      padding: 0.68rem 0.75rem;
+      font-family: inherit;
+      font-size: 1rem;
+      color: #102f64;
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    input:focus {
+      outline: 2px solid rgba(10, 132, 255, 0.28);
+      border-color: rgba(10, 132, 255, 0.48);
+    }
+
+    .submit {
+      min-height: 48px;
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-family: "Sora", sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      background: linear-gradient(128deg, #0072ff, #00b7ff);
+      box-shadow: 0 14px 32px rgba(0, 111, 255, 0.3);
+    }
+
+    .submit:hover {
+      transform: translateY(-1px);
+    }
+
+    .message {
+      border-radius: 10px;
+      padding: 0.62rem 0.72rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: none;
+    }
+
+    .message.success {
+      border: 1px solid rgba(22, 154, 96, 0.25);
+      background: var(--success-bg);
+      color: var(--success-text);
+    }
+
+    .message.error {
+      border: 1px solid rgba(196, 54, 54, 0.22);
+      background: var(--error-bg);
+      color: var(--error-text);
+    }
+
+    .links {
+      margin-top: 0.8rem;
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      color: #1e4a90;
+      font-weight: 800;
+      font-size: 0.88rem;
+      text-underline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>#ROADTO1500</h1>
+      <p class="subline">Update tracker count</p>
+
+      <div class="current-chip">
+        <span>Current count:</span>
+        <span id="current-count-chip">--</span>
+      </div>
+
+      <form id="count-form">
+        <label for="current-count-input">Current beer count =</label>
+        <input id="current-count-input" name="current_count" type="number" min="0" step="1" placeholder="empty box" required />
+
+        <label for="admin-key-input">Admin key (optional, if configured)</label>
+        <input id="admin-key-input" name="admin_key" type="password" placeholder="leave blank if not set" />
+
+        <button class="submit" type="submit">Add beer</button>
+      </form>
+
+      <p class="message success" id="success-message">Count updated.</p>
+      <p class="message error" id="error-message">Could not update count.</p>
+
+      <div class="links">
+        <a href="/austinbeertracker2026roadto1500">Open tracker page</a>
+        <a href="/">Back to homepage</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById("count-form");
+    const currentChip = document.getElementById("current-count-chip");
+    const currentCountInput = document.getElementById("current-count-input");
+    const adminKeyInput = document.getElementById("admin-key-input");
+    const successMessage = document.getElementById("success-message");
+    const errorMessage = document.getElementById("error-message");
+
+    function showMessage(type, text) {
+      successMessage.style.display = "none";
+      errorMessage.style.display = "none";
+
+      if (type === "success") {
+        successMessage.textContent = text;
+        successMessage.style.display = "block";
+      } else if (type === "error") {
+        errorMessage.textContent = text;
+        errorMessage.style.display = "block";
+      }
+    }
+
+    async function loadCurrentStats() {
+      try {
+        const response = await fetch("/api/beer-stats", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error("Could not load stats");
+        }
+        const stats = await response.json();
+        const current = Number(stats.current_count) || 0;
+        currentChip.textContent = String(current);
+        currentCountInput.value = String(current);
+      } catch (error) {
+        showMessage("error", "Could not load current count. Try refreshing.");
+      }
+    }
+
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      showMessage("", "");
+
+      const nextCount = Number(currentCountInput.value);
+      if (!Number.isInteger(nextCount) || nextCount < 0) {
+        showMessage("error", "Please enter a non-negative whole number.");
+        return;
+      }
+
+      const headers = {
+        "Content-Type": "application/json"
+      };
+
+      const adminKey = adminKeyInput.value.trim();
+      if (adminKey) {
+        headers["x-admin-key"] = adminKey;
+      }
+
+      try {
+        const response = await fetch("/api/beer-stats/current-count", {
+          method: "POST",
+          headers,
+          body: JSON.stringify({
+            current_count: nextCount,
+            admin_key: adminKey
+          })
+        });
+
+        const payload = await response.json();
+        if (!response.ok) {
+          throw new Error(payload.error || "Could not update count.");
+        }
+
+        const current = Number(payload.stats && payload.stats.current_count) || nextCount;
+        currentChip.textContent = String(current);
+        currentCountInput.value = String(current);
+        showMessage("success", "Updated to " + current + ". Refresh tracker page to verify.");
+      } catch (error) {
+        showMessage("error", error.message || "Could not update count.");
+      }
+    });
+
+    loadCurrentStats();
+  </script>
+</body>
+</html>
