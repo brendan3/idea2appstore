@@ -14,10 +14,11 @@ const BEER_TRACKER_FILE = path.join(ROOT_DIR, "austinbeertracker2026roadto1500.h
 const BEER_TRACKER_ADMIN_FILE = path.join(ROOT_DIR, "austinbeertracker2026roadto1500_current_count.html");
 
 const ADMIN_KEY = process.env.BEER_TRACKER_ADMIN_KEY || "";
-const PORT = Number(process.env.PORT) || 8080;
+const PRIMARY_PORT = Number(process.env.PORT) || 8080;
+const FALLBACK_HTTP_PORT = 80;
 
 const hasDatabase = Boolean(process.env.DATABASE_URL);
-const pool = hasDatabase
+let pool = hasDatabase
   ? new Pool({
       connectionString: process.env.DATABASE_URL
     })
@@ -214,13 +215,42 @@ app.use((_, res) => {
   res.status(404).send("Not found");
 });
 
+function listenOnPort(port, label) {
+  return new Promise((resolve) => {
+    const server = app.listen(port, "0.0.0.0", () => {
+      // eslint-disable-next-line no-console
+      console.log(label + " listening on port " + port);
+      resolve(true);
+    });
+
+    server.on("error", (error) => {
+      // eslint-disable-next-line no-console
+      console.warn("Could not open " + label + " on port " + port + ":", error.message);
+      resolve(false);
+    });
+  });
+}
+
 async function start() {
   try {
-    await ensureDatabaseSchema();
-    app.listen(PORT, () => {
+    try {
+      await ensureDatabaseSchema();
+    } catch (error) {
+      // DATABASE_URL is optional. If it's present but unavailable, continue with file fallback.
+      pool = null;
       // eslint-disable-next-line no-console
-      console.log("Server listening on port " + PORT);
-    });
+      console.warn("Database unavailable, using beer_stats.json fallback:", error.message);
+    }
+
+    const primaryOk = await listenOnPort(PRIMARY_PORT, "Primary HTTP");
+    let fallbackOk = false;
+    if (PRIMARY_PORT !== FALLBACK_HTTP_PORT) {
+      fallbackOk = await listenOnPort(FALLBACK_HTTP_PORT, "Fallback HTTP");
+    }
+
+    if (!primaryOk && !fallbackOk) {
+      throw new Error("No HTTP listener could be started.");
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error("Failed to start server:", error);
