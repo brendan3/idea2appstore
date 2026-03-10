@@ -3,20 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Idea2Appstore | iOS App Development</title>
-  <link
-    rel="icon"
-    type="image/png"
-    href="assets/i2a-logo.png"
-  />
-  <link
-    rel="apple-touch-icon"
-    href="assets/i2a-logo.png"
-  />
+  <title>Idea2Appstore | iOS App Launch Partner</title>
   <meta
     name="description"
-    content="Idea2Appstore helps founders build polished iOS apps and launch them on the Apple App Store."
+    content="Launch your iOS app to the App Store without getting stuck. Fixed-quote iOS development, PWA wrapping, and App Store submission support."
   />
+  <link rel="icon" type="image/png" href="/assets/i2a-logo.png" />
+  <link rel="apple-touch-icon" href="/assets/i2a-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -25,17 +18,21 @@
   />
   <style>
     :root {
-      --bg: #f5f9ff;
-      --surface: rgba(255, 255, 255, 0.75);
+      --bg: #f6f0ff;
+      --surface: rgba(255, 255, 255, 0.8);
       --surface-solid: #ffffff;
-      --text: #0b1530;
-      --muted: #4f5e85;
-      --accent: #0a84ff;
-      --accent-2: #36c7ff;
-      --line: rgba(13, 31, 71, 0.12);
-      --shadow: 0 20px 60px rgba(12, 38, 92, 0.16);
-      --radius: 22px;
-      --max-width: 1160px;
+      --ink: #231341;
+      --muted: #665a86;
+      --line: rgba(118, 72, 194, 0.16);
+      --primary: #7e3af2;
+      --primary-2: #a855f7;
+      --accent: #e879f9;
+      --lavender: #efe3ff;
+      --lavender-2: #f8f2ff;
+      --success: #1fb76d;
+      --radius: 20px;
+      --shadow: 0 22px 54px rgba(84, 40, 156, 0.18);
+      --max: 1180px;
     }
 
     * {
@@ -46,15 +43,16 @@
     body {
       margin: 0;
       padding: 0;
+      scroll-behavior: smooth;
     }
 
     body {
       font-family: "Manrope", sans-serif;
-      color: var(--text);
+      color: var(--ink);
       background:
-        radial-gradient(70rem 40rem at 10% -10%, #d2e7ff 0%, transparent 60%),
-        radial-gradient(42rem 24rem at 88% 12%, #d7f5ff 0%, transparent 65%),
-        linear-gradient(180deg, #f8fbff 0%, #f1f7ff 50%, #f8fbff 100%);
+        radial-gradient(70rem 38rem at 6% -8%, rgba(207, 178, 255, 0.72) 0%, transparent 62%),
+        radial-gradient(56rem 34rem at 95% 10%, rgba(243, 177, 255, 0.52) 0%, transparent 64%),
+        linear-gradient(180deg, #fbf8ff 0%, #f5efff 48%, #fbf8ff 100%);
       min-height: 100vh;
       line-height: 1.45;
     }
@@ -64,452 +62,536 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background-image: linear-gradient(rgba(9, 34, 84, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(9, 34, 84, 0.05) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: radial-gradient(circle at center, black 15%, transparent 80%);
-      opacity: 0.32;
       z-index: 0;
+      opacity: 0.28;
+      background-image:
+        linear-gradient(rgba(61, 27, 115, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(61, 27, 115, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, black 12%, transparent 82%);
     }
 
     .container {
-      width: min(var(--max-width), calc(100% - 2rem));
+      width: min(var(--max), calc(100% - 2rem));
       margin: 0 auto;
       position: relative;
       z-index: 1;
     }
 
-    .hero-wrap {
-      padding: 1.25rem 0 2rem;
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(246, 240, 255, 0.84);
+      border-bottom: 1px solid rgba(117, 73, 194, 0.12);
     }
 
-    .topbar {
+    .header-inner {
+      min-height: 76px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 0.4rem 0 1.5rem;
-      position: relative;
+      justify-content: space-between;
+      gap: 0.8rem;
     }
 
-    .brand {
+    .logo {
+      text-decoration: none;
+      color: var(--ink);
+      font-family: "Sora", sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      font-size: clamp(1.05rem, 2.2vw, 1.32rem);
       display: inline-flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.68rem;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: 0 14px 28px rgba(109, 52, 207, 0.28);
+      flex: 0 0 auto;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      min-height: 44px;
+      border-radius: 12px;
       font-family: "Sora", sans-serif;
       font-weight: 700;
-      letter-spacing: 0.01em;
-      color: var(--text);
+      font-size: 0.84rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.62rem 1rem;
+      border: 1px solid transparent;
       text-decoration: none;
-      font-size: 1.08rem;
+      transition: 170ms ease;
     }
 
-    .topbar-logo {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40px;
-      height: 40px;
-      border-radius: 18px;
-      object-fit: cover;
-      box-shadow: 0 10px 24px rgba(83, 46, 185, 0.35);
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(132deg, var(--primary), var(--primary-2));
+      box-shadow: 0 16px 32px rgba(126, 58, 242, 0.28);
     }
 
-    .brand-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: 0 0 20px rgba(10, 132, 255, 0.55);
+    .btn-secondary {
+      color: #5c2fb1;
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(123, 77, 205, 0.2);
     }
 
-    .top-cta {
-      text-decoration: none;
-      color: #0a3f87;
-      background: rgba(255, 255, 255, 0.75);
-      border: 1px solid rgba(10, 132, 255, 0.22);
-      border-radius: 999px;
-      padding: 0.55rem 0.95rem;
-      font-weight: 700;
-      font-size: 0.92rem;
-      backdrop-filter: blur(8px);
-      transition: 180ms ease;
-    }
-
-    .top-cta:hover {
+    .btn:hover,
+    .choose-package:hover,
+    .submit-btn:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(10, 132, 255, 0.18);
     }
 
     .hero {
+      padding: 2.2rem 0 1.2rem;
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 2rem;
-      align-items: center;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 1.15rem;
+      align-items: stretch;
     }
 
-    .hero-copy {
+    .panel {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: calc(var(--radius) + 8px);
-      padding: clamp(1.35rem, 3vw, 2rem);
+      border-radius: calc(var(--radius) + 4px);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-      animation: rise 600ms ease-out both;
+      backdrop-filter: blur(12px);
+      padding: clamp(1.08rem, 2vw, 1.4rem);
     }
 
-    .eyebrow {
+    h1,
+    h2,
+    h3 {
       margin: 0;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: #40649d;
-      font-weight: 800;
+      font-family: "Sora", sans-serif;
+      letter-spacing: -0.02em;
+      color: #241248;
     }
 
     h1 {
-      margin: 0.45rem 0 0.35rem;
-      font-family: "Sora", sans-serif;
-      font-size: clamp(2rem, 5.2vw, 4.15rem);
-      line-height: 0.95;
-      letter-spacing: -0.035em;
-      color: #07173d;
+      font-size: clamp(2rem, 4.4vw, 3.28rem);
+      line-height: 1.04;
     }
 
-    .subtitle {
-      margin: 0 0 1.1rem;
-      color: var(--muted);
-      font-size: clamp(1rem, 2.2vw, 1.3rem);
-      max-width: 38ch;
-    }
-
-    .service-list {
-      list-style: none;
-      margin: 0 0 1.4rem;
-      padding: 0;
-      display: grid;
-      gap: 0.6rem;
-    }
-
-    .service-list li {
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(11, 56, 132, 0.13);
-      border-radius: 13px;
-      padding: 0.68rem 0.8rem;
-      color: #19396f;
-      font-weight: 600;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      align-items: center;
-    }
-
-    .primary-btn {
-      font-family: "Sora", sans-serif;
-      text-decoration: none;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      color: #ffffff;
-      background: linear-gradient(128deg, #0071ff, #00b4ff);
-      border-radius: 14px;
-      border: none;
-      padding: 0.95rem 1.35rem;
+    .hero-kicker {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      min-height: 52px;
-      box-shadow: 0 18px 36px rgba(11, 107, 255, 0.36);
-      transition: transform 180ms ease, box-shadow 180ms ease;
+      gap: 0.65rem;
+      margin-bottom: 0.9rem;
+      padding: 0.5rem 0.62rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(128, 76, 206, 0.18);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
     }
 
-    .primary-btn:hover {
-      transform: translateY(-2px) scale(1.01);
-      box-shadow: 0 24px 40px rgba(11, 107, 255, 0.4);
+    .hero-kicker img {
+      width: 32px;
+      height: 32px;
+      border-radius: 11px;
+      object-fit: cover;
     }
 
-    .micro-note {
-      margin: 0;
-      color: #4e6290;
-      font-size: 0.89rem;
+    .hero-kicker span {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #6633be;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .subhead {
+      margin: 0.7rem 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      max-width: 56ch;
       font-weight: 600;
     }
 
-    .hero-visual {
-      position: relative;
-      display: grid;
-      place-items: center;
-      min-height: 420px;
-      animation: rise 700ms ease-out both;
+    .chips {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
-    .phone {
+    .chip {
+      border-radius: 999px;
+      border: 1px solid rgba(128, 78, 205, 0.18);
+      background: rgba(255, 255, 255, 0.9);
+      color: #6431bf;
+      padding: 0.3rem 0.62rem;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .price-row {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .price-pill {
+      border-radius: 12px;
+      border: 1px solid rgba(121, 76, 201, 0.18);
+      background: linear-gradient(140deg, rgba(255, 255, 255, 0.92), rgba(241, 231, 255, 0.94));
+      padding: 0.48rem 0.7rem;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #5b2eaf;
+    }
+
+    .hero-cta-row {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .micro {
+      margin: 0.78rem 0 0;
+      color: #6d5f8d;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .proof-card {
       position: relative;
-      width: min(84vw, 280px);
-      aspect-ratio: 9 / 19;
-      border-radius: 34px;
-      background: linear-gradient(175deg, #fefeff, #f6f8ff 40%, #ebf4ff 100%);
-      border: 1px solid rgba(18, 57, 130, 0.2);
-      box-shadow:
-        0 26px 52px rgba(24, 62, 133, 0.28),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
       overflow: hidden;
-      padding: 1rem 0.9rem;
-      z-index: 2;
     }
 
-    .phone::before {
+    .proof-card::after {
       content: "";
       position: absolute;
-      width: 38%;
-      height: 3%;
-      left: 31%;
-      top: 0.9%;
+      inset: auto -12% -25% auto;
+      width: 220px;
+      height: 220px;
       border-radius: 999px;
-      background: #0f1f43;
-      opacity: 0.55;
+      background: radial-gradient(circle, rgba(171, 85, 247, 0.18) 0%, transparent 72%);
+      pointer-events: none;
     }
 
-    .screen-card {
-      background: rgba(255, 255, 255, 0.88);
-      border: 1px solid rgba(10, 34, 82, 0.08);
-      border-radius: 14px;
-      padding: 0.85rem 0.8rem;
-      margin-bottom: 0.65rem;
-      box-shadow: 0 10px 20px rgba(36, 77, 155, 0.12);
+    .proof-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-bottom: 0.7rem;
     }
 
-    .screen-card strong {
-      display: block;
+    .proof-head strong {
       font-family: "Sora", sans-serif;
-      font-size: 0.86rem;
-      margin-bottom: 0.2rem;
+      font-size: 1rem;
       letter-spacing: -0.01em;
     }
 
-    .screen-card span {
-      color: #4d6394;
-      font-size: 0.79rem;
-      font-weight: 600;
+    .proof-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: 0 12px 24px rgba(126, 58, 242, 0.22);
     }
 
-    .pill-row {
+    .badge-row {
       display: flex;
-      flex-wrap: wrap;
       gap: 0.45rem;
-      margin-top: 0.2rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
     }
 
-    .pill {
-      font-size: 0.68rem;
+    .store-badge {
+      font-size: 0.71rem;
       border-radius: 999px;
-      padding: 0.25rem 0.55rem;
-      background: #eaf4ff;
-      color: #28539a;
-      border: 1px solid #d2e6ff;
+      border: 1px solid rgba(127, 77, 205, 0.18);
+      background: rgba(255, 255, 255, 0.92);
+      color: #6734c2;
+      font-weight: 800;
+      padding: 0.24rem 0.55rem;
+    }
+
+    .proof-shots {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.55rem;
+    }
+
+    .proof-shot {
+      border-radius: 14px;
+      border: 1px solid rgba(124, 77, 203, 0.18);
+      overflow: hidden;
+      min-height: 188px;
+      background: #efe6ff;
+    }
+
+    .proof-shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .proof-app-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 0.75rem;
+      color: #5b2faf;
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .proof-app-link:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .testimonial {
+      margin-top: 0.72rem;
+      border-radius: 14px;
+      border: 1px solid rgba(125, 79, 203, 0.15);
+      background: rgba(255, 255, 255, 0.84);
+      padding: 0.72rem 0.8rem;
+    }
+
+    .testimonial p {
+      margin: 0;
+      color: #5b32ae;
+      font-size: 0.9rem;
       font-weight: 700;
     }
 
-    .glow {
-      position: absolute;
-      border-radius: 999px;
-      filter: blur(2px);
-      z-index: 1;
-    }
-
-    .glow.one {
-      width: 180px;
-      height: 180px;
-      top: 5%;
-      left: 8%;
-      background: radial-gradient(circle, rgba(31, 185, 255, 0.45), transparent 68%);
-      animation: driftA 8s ease-in-out infinite alternate;
-    }
-
-    .glow.two {
-      width: 210px;
-      height: 210px;
-      right: 2%;
-      bottom: 0;
-      background: radial-gradient(circle, rgba(37, 120, 255, 0.38), transparent 68%);
-      animation: driftB 10s ease-in-out infinite alternate;
-    }
-
-    .phone-logo {
-      margin-top: 0.4rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .phone-logo img {
-      max-width: 58%;
-      height: auto;
-      border-radius: 20%;
-      box-shadow: 0 10px 24px rgba(129, 88, 255, 0.32);
+    .testimonial small {
+      display: block;
+      margin-top: 0.3rem;
+      color: #7a6a98;
+      font-weight: 700;
+      font-size: 0.76rem;
     }
 
     .section {
-      margin-top: 3.5rem;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: clamp(1.2rem, 3vw, 2rem);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-      animation: rise 700ms ease-out both;
+      margin-top: 1rem;
+      padding: clamp(1.05rem, 2vw, 1.4rem);
+    }
+
+    .section-intro {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .section-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      object-fit: cover;
+      box-shadow: 0 10px 22px rgba(126, 58, 242, 0.18);
     }
 
     .section h2 {
-      margin: 0;
-      font-family: "Sora", sans-serif;
-      font-size: clamp(1.5rem, 3vw, 2.1rem);
-      letter-spacing: -0.02em;
+      font-size: clamp(1.4rem, 2.8vw, 2rem);
+      line-height: 1.1;
     }
 
-    .section p {
-      margin: 0.5rem 0 0;
+    .section-lede {
+      margin: 0.38rem 0 0;
       color: var(--muted);
-      max-width: 70ch;
-      font-weight: 500;
+      font-size: 0.94rem;
+      font-weight: 700;
+      max-width: 68ch;
     }
 
+    .cards-3,
+    .packages,
+    .steps,
     .portfolio-grid {
-      margin-top: 1.2rem;
+      margin-top: 0.88rem;
       display: grid;
+      gap: 0.72rem;
+    }
+
+    .cards-3,
+    .packages,
+    .steps,
+    .portfolio-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.9rem;
     }
 
-    .portfolio-slot {
-      min-height: 260px;
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.82), rgba(233, 243, 255, 0.72));
-      border: 1px dashed rgba(38, 92, 186, 0.42);
-      border-radius: 16px;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      gap: 0.7rem;
+    .outcome-card,
+    .package,
+    .step,
+    .portfolio-item,
+    details,
+    .quote-wrap {
+      border-radius: 14px;
+      border: 1px solid rgba(123, 78, 204, 0.18);
+      background: rgba(255, 255, 255, 0.88);
     }
 
-    .portfolio-slot strong {
-      font-family: "Sora", sans-serif;
-      font-size: 1.1rem;
-      letter-spacing: -0.01em;
-      color: #112e62;
+    .outcome-card,
+    .package,
+    .step,
+    .portfolio-item {
+      padding: 0.92rem;
     }
 
-    .portfolio-slot > span {
-      color: #516ea1;
-      font-size: 0.88rem;
+    .outcome-card h3,
+    .step h3,
+    .portfolio-item h3,
+    .package h3 {
+      font-size: 1.03rem;
+    }
+
+    .outcome-card p,
+    .step p,
+    .portfolio-item p,
+    .best-for,
+    details p {
+      margin: 0.42rem 0 0;
+      color: var(--muted);
+      font-size: 0.87rem;
       font-weight: 700;
     }
 
-    .portfolio-inline-link {
-      color: #214d90;
-      text-decoration: underline;
-      text-underline-offset: 3px;
+    .outcome-card ul,
+    .package ul {
+      margin: 0.58rem 0 0;
+      padding-left: 1.05rem;
+      color: #5a31ac;
+      font-size: 0.84rem;
       font-weight: 800;
+      display: grid;
+      gap: 0.3rem;
     }
 
-    .portfolio-inline-link:hover {
-      opacity: 0.86;
+    .price {
+      margin: 0;
+      color: #5625ad;
+      font-weight: 900;
+      font-size: 1.38rem;
+      font-family: "Sora", sans-serif;
     }
 
-    .shot-strip {
+    .package {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .choose-package {
+      margin-top: auto;
+      width: 100%;
+      border: 1px solid rgba(124, 78, 205, 0.2);
+      border-radius: 10px;
+      min-height: 42px;
+      background: rgba(255, 255, 255, 0.94);
+      color: #5d30b1;
+      font-family: "Sora", sans-serif;
+      font-weight: 700;
+      font-size: 0.81rem;
+      cursor: pointer;
+      transition: 170ms ease;
+    }
+
+    .choose-package:hover {
+      box-shadow: 0 10px 20px rgba(117, 70, 195, 0.14);
+    }
+
+    .step-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: inline-grid;
+      place-items: center;
+      background: #f0e6ff;
+      color: #5c2fb1;
+      font-size: 0.77rem;
+      font-weight: 900;
+      margin-bottom: 0.48rem;
+    }
+
+    .shots {
+      margin-top: 0.58rem;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.5rem;
-      margin-top: 0.1rem;
+      gap: 0.45rem;
     }
 
     .shot {
-      border: 1px solid rgba(35, 87, 180, 0.22);
       border-radius: 12px;
-      min-height: 130px;
-      background: linear-gradient(175deg, rgba(255, 255, 255, 0.74), rgba(214, 229, 255, 0.8));
       overflow: hidden;
-      padding: 0;
+      min-height: 122px;
+      border: 1px solid rgba(125, 79, 203, 0.18);
+      background: #f0e6ff;
     }
 
     .shot img {
       width: 100%;
       height: 100%;
-      display: block;
       object-fit: cover;
+      display: block;
     }
 
-    .app-restaurant .shot {
-      background: linear-gradient(175deg, rgba(255, 250, 245, 0.9), rgba(255, 230, 210, 0.86));
-      border-color: rgba(228, 126, 72, 0.32);
-      color: #9f4d1f;
-    }
-
-    .app-noizzle .shot {
-      background: linear-gradient(175deg, rgba(241, 253, 255, 0.92), rgba(215, 247, 251, 0.86));
-      border-color: rgba(84, 190, 201, 0.35);
-      color: #246f77;
-    }
-
-    .app-hyrdate .shot {
-      background: linear-gradient(175deg, rgba(239, 246, 255, 0.92), rgba(214, 231, 255, 0.87));
-      border-color: rgba(106, 163, 250, 0.35);
-      color: #255fa7;
-    }
-
-    .portfolio-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 0.2rem;
-      min-height: 40px;
-      border-radius: 10px;
-      border: 1px solid rgba(38, 96, 190, 0.22);
-      background: rgba(255, 255, 255, 0.82);
-      text-decoration: none;
-      color: #214d90;
+    .project-link {
+      margin-top: 0.55rem;
+      display: inline-block;
+      color: #5b2faf;
+      font-size: 0.82rem;
       font-weight: 800;
-      font-size: 0.83rem;
-      transition: 170ms ease;
-    }
-
-    .portfolio-link:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 20px rgba(32, 79, 154, 0.17);
-    }
-
-    .portfolio-note {
-      margin-top: 0.7rem;
-      color: #5b6f97;
-      font-size: 0.86rem;
-      font-weight: 700;
-    }
-
-    .portfolio-note a {
-      color: inherit;
-      text-decoration: underline;
       text-underline-offset: 3px;
     }
 
-    .inquiry-wrap {
-      margin-top: 1.2rem;
-      border: 1px solid rgba(17, 70, 154, 0.14);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.72);
-      padding: 1rem;
+    .faq-list {
+      margin-top: 0.78rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    details {
+      padding: 0.72rem 0.82rem;
+    }
+
+    summary {
+      cursor: pointer;
+      font-family: "Sora", sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #5c2eaf;
+    }
+
+    .quote-wrap {
+      margin-top: 0.82rem;
+      padding: 0.88rem;
     }
 
     .form-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.75rem;
+      gap: 0.65rem;
     }
 
     .field {
       display: grid;
-      gap: 0.38rem;
+      gap: 0.3rem;
     }
 
     .field.full {
@@ -517,8 +599,8 @@
     }
 
     .field label {
-      font-size: 0.84rem;
-      color: #355b99;
+      color: #6a39c0;
+      font-size: 0.8rem;
       font-weight: 800;
       letter-spacing: 0.01em;
     }
@@ -527,281 +609,403 @@
     .field select,
     .field textarea {
       width: 100%;
-      border: 1px solid rgba(35, 87, 180, 0.22);
+      border: 1px solid rgba(124, 77, 203, 0.2);
+      background: rgba(255, 255, 255, 0.96);
       border-radius: 10px;
-      padding: 0.68rem 0.75rem;
+      color: #3b246d;
       font-family: inherit;
-      font-size: 0.92rem;
-      color: #102f64;
-      background: rgba(255, 255, 255, 0.9);
+      font-size: 0.89rem;
+      padding: 0.68rem 0.76rem;
     }
 
     .field textarea {
-      min-height: 138px;
+      min-height: 132px;
       resize: vertical;
-      line-height: 1.5;
+      line-height: 1.45;
     }
 
     .field input:focus,
     .field select:focus,
     .field textarea:focus {
-      outline: 2px solid rgba(10, 132, 255, 0.28);
-      border-color: rgba(10, 132, 255, 0.48);
+      outline: 2px solid rgba(168, 85, 247, 0.24);
+      border-color: rgba(126, 58, 242, 0.5);
     }
 
-    .form-actions {
-      margin-top: 0.85rem;
+    .quote-actions {
+      margin-top: 0.7rem;
       display: flex;
+      gap: 0.55rem;
       flex-wrap: wrap;
-      gap: 0.7rem;
       align-items: center;
     }
 
-    .secondary-btn {
-      min-height: 46px;
-      border: 1px solid rgba(18, 82, 177, 0.26);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.86);
-      color: #224a8a;
+    .submit-btn {
+      min-height: 44px;
+      border: none;
+      border-radius: 10px;
+      padding: 0.66rem 1rem;
+      color: #fff;
+      background: linear-gradient(132deg, var(--primary), var(--primary-2));
       font-family: "Sora", sans-serif;
       font-weight: 700;
-      padding: 0.7rem 1rem;
+      font-size: 0.83rem;
       cursor: pointer;
-      transition: 170ms ease;
+      box-shadow: 0 14px 30px rgba(126, 58, 242, 0.26);
     }
 
-    .secondary-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(27, 83, 171, 0.14);
+    .thanks {
+      display: none;
+      margin-top: 0.7rem;
+      border-radius: 10px;
+      border: 1px solid rgba(103, 191, 144, 0.26);
+      background: rgba(31, 183, 109, 0.11);
+      color: #0f6b43;
+      padding: 0.64rem 0.72rem;
+      font-size: 0.86rem;
+      font-weight: 800;
     }
 
-    .small-print {
-      margin: 0;
-      color: #5f7297;
-      font-size: 0.82rem;
-      font-weight: 700;
-    }
-
-    .client-placeholder {
-      margin-top: 1rem;
-      min-height: 78px;
-      border: 1px dashed rgba(22, 77, 173, 0.35);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.65);
-      display: grid;
-      place-items: center;
-      color: #2f568f;
-      font-weight: 700;
-      font-size: 0.92rem;
-      text-align: center;
-      padding: 0.65rem;
+    .thanks a {
+      color: #125d3e;
+      text-underline-offset: 3px;
     }
 
     footer {
-      padding: 2rem 0 2.2rem;
-      text-align: center;
-      color: #486293;
-      font-size: 0.9rem;
-      font-weight: 600;
+      padding: 1.5rem 0 1.65rem;
+      color: #6e628d;
+      font-weight: 700;
+      font-size: 0.84rem;
     }
 
-    @keyframes rise {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .footer-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
 
-    @keyframes driftA {
-      from {
-        transform: translateY(0) translateX(0);
-      }
-      to {
-        transform: translateY(24px) translateX(10px);
-      }
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      color: #5d32b1;
     }
 
-    @keyframes driftB {
-      from {
-        transform: translateY(0) translateX(0);
-      }
-      to {
-        transform: translateY(-20px) translateX(-16px);
-      }
+    .footer-brand img {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 10px 22px rgba(126, 58, 242, 0.18);
     }
 
-    @media (max-width: 980px) {
+    footer a {
+      color: #5c2fb1;
+      text-underline-offset: 3px;
+      margin: 0 0.24rem;
+    }
+
+    @media (max-width: 1024px) {
       .hero {
         grid-template-columns: 1fr;
       }
 
-      .hero-visual {
-        min-height: 340px;
-      }
-
+      .cards-3,
+      .packages,
+      .steps,
       .portfolio-grid {
         grid-template-columns: 1fr 1fr;
       }
     }
 
     @media (max-width: 700px) {
-      .portfolio-grid {
-        grid-template-columns: 1fr;
+      .header-inner {
+        padding: 0.5rem 0;
       }
 
+      .header-actions {
+        width: 100%;
+      }
+
+      .header-actions .btn {
+        flex: 1 1 46%;
+      }
+
+      .cards-3,
+      .packages,
+      .steps,
+      .portfolio-grid,
       .form-grid {
         grid-template-columns: 1fr;
       }
 
-      .section {
-        margin-top: 2rem;
+      .hero {
+        padding-top: 1.25rem;
       }
 
-      .topbar {
-        padding-bottom: 1rem;
+      .footer-wrap {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container hero-wrap">
-    <header class="topbar">
-      <a class="brand" href="#">
-        <span class="brand-dot" aria-hidden="true"></span>
+  <header class="sticky-header">
+    <div class="container header-inner">
+      <a class="logo" href="/">
+        <img class="logo-mark" src="/assets/i2a-logo.png" alt="Idea2Appstore logo" />
         <span>Idea2Appstore</span>
       </a>
-      <img
-        src="assets/i2a-logo.png"
-        alt="Idea2Appstore logo"
-        class="topbar-logo"
-      />
-      <a class="top-cta" href="mailto:brendanpinder0@gmail.com">Contact</a>
-    </header>
+      <div class="header-actions">
+        <a class="btn btn-primary" href="#quote-form">Get a quote</a>
+        <a class="btn btn-secondary" href="mailto:brendanpinder0@gmail.com?subject=Free%20Consult%20Request">Book free consult</a>
+      </div>
+    </div>
+  </header>
 
+  <main class="container">
     <section class="hero">
-      <article class="hero-copy">
-        <p class="eyebrow">The iOS Expertise You Need to Reach the Masses</p>
-        <h1>Idea2Appstore</h1>
-        <p class="subtitle">Your Idea in APP Form! For:</p>
-        <ul class="service-list">
-          <li>End-to-end development, from an "app idea" to the Apple App Store</li>
-          <li>Help along the way for vibe-coded PWA's</li>
-          <li>Need to wrap an existing web app for iOS</li>
-          <li>Business who want a mobile app</li>
-          <li>Need translation to Swift</li>
-          <li>Need someone with an Apple Developer Account for testing/launch support</li>
-        </ul>
-        <div class="hero-actions">
-          <a class="primary-btn" href="mailto:brendanpinder0@gmail.com">Book Your FREE Consult</a>
-          <p class="micro-note">Replies go directly to brendanpinder0@gmail.com</p>
+      <article class="panel">
+        <div class="hero-kicker">
+          <img src="/assets/i2a-logo.png" alt="Idea2Appstore app icon" />
+          <span>iOS Launch Partner</span>
         </div>
+        <h1>Launch your iOS app to the App Store (without getting stuck).</h1>
+        <p class="subhead">
+          I build new iOS apps, wrap PWAs, or rescue vibe-coded projects, then handle TestFlight + App Store submission.
+        </p>
+        <div class="chips">
+          <span class="chip">Swift</span>
+          <span class="chip">TestFlight</span>
+          <span class="chip">App Store</span>
+          <span class="chip">PWA -&gt; Native</span>
+        </div>
+        <div class="price-row">
+          <div class="price-pill">Starts at $1000</div>
+          <div class="price-pill">Typical timeline: 2-6 weeks</div>
+        </div>
+        <div class="hero-cta-row">
+          <a class="btn btn-primary" href="#quote-form">Get a fixed quote</a>
+          <a class="btn btn-secondary" href="mailto:brendanpinder0@gmail.com?subject=Free%20Consult%20Request">Book a free consult</a>
+        </div>
+        <p class="micro">Replies go directly to brendanpinder0@gmail.com</p>
       </article>
 
-      <aside class="hero-visual" aria-hidden="true">
-        <div class="glow one"></div>
-        <div class="glow two"></div>
-        <div class="phone">
-          <div class="screen-card">
-            <strong>Idea Validation</strong>
-            <span>Scope, UX flow, monetization, roadmap</span>
+      <aside class="panel proof-card">
+        <div class="proof-head">
+          <strong>Shipped apps:</strong>
+          <img class="proof-logo" src="/assets/i2a-logo.png" alt="Idea2Appstore logo badge" />
+        </div>
+        <div class="badge-row">
+          <span class="store-badge">Swift</span>
+          <span class="store-badge">TestFlight</span>
+          <span class="store-badge">App Store Ready</span>
+        </div>
+        <div class="proof-shots">
+          <div class="proof-shot">
+            <img src="/assets/portfolio/restaurant-club-1.jpeg" alt="Restaurant Club screenshot" loading="lazy" />
           </div>
-          <div class="screen-card">
-            <strong>iOS Build + Launch</strong>
-            <span>Swift implementation and App Store submission</span>
+          <div class="proof-shot">
+            <img src="/assets/portfolio/restaurant-club-2.jpeg" alt="Restaurant Club screenshot" loading="lazy" />
           </div>
-          <div class="screen-card">
-            <strong>Support + Iteration</strong>
-            <span>Analytics-driven updates and performance tuning</span>
-            <div class="pill-row">
-              <span class="pill">Swift</span>
-              <span class="pill">TestFlight</span>
-              <span class="pill">App Store</span>
-            </div>
-          </div>
-          <div class="phone-logo">
-            <img src="assets/i2a-logo.png" alt="Idea2Appstore logo icon" />
-          </div>
+        </div>
+        <a class="proof-app-link" href="https://apps.apple.com/us/app/restaurant-club/id6756309257" target="_blank" rel="noopener noreferrer">
+          Restaurant Club on the App Store
+        </a>
+        <div class="testimonial">
+          <p>"The app felt polished and launch-ready fast. Weekly demos made decisions easy."</p>
+          <small>Beta user feedback, Restaurant Club</small>
         </div>
       </aside>
     </section>
 
-    <section class="section" id="portfolio">
-      <h2>Portfolio</h2>
-      <p>My personal projects that I've built and launched! I can share additional details and information during your free consult.</p>
-      <div class="portfolio-grid">
-        <article class="portfolio-slot app-restaurant">
-          <strong>Restaurant Club</strong>
-          <span>
-            Social, Food, Events App:
-            <a
-              class="portfolio-inline-link"
-              href="https://apps.apple.com/us/app/restaurant-club/id6756309257"
-              target="_blank"
-              rel="noopener noreferrer"
-            >Download on the App Store</a>
-          </span>
-          <div class="shot-strip">
-            <div class="shot">
-              <img src="assets/portfolio/restaurant-club-1.jpeg" alt="Restaurant Club screenshot 1" loading="lazy" />
-            </div>
-            <div class="shot">
-              <img src="assets/portfolio/restaurant-club-2.jpeg" alt="Restaurant Club screenshot 2" loading="lazy" />
-            </div>
-            <div class="shot">
-              <img src="assets/portfolio/restaurant-club-3.jpeg" alt="Restaurant Club screenshot 3" loading="lazy" />
-            </div>
-          </div>
+    <section class="panel section" id="who-help">
+      <div class="section-intro">
+        <img class="section-mark" src="/assets/i2a-logo.png" alt="Idea2Appstore logo" />
+        <h2>Who I Help + What You Get</h2>
+      </div>
+      <div class="cards-3">
+        <article class="outcome-card">
+          <h3>Idea -&gt; MVP -&gt; App Store</h3>
+          <p>For founders who need a sharp mobile product shipped without getting buried in process.</p>
+          <ul>
+            <li>Scope and roadmap fast</li>
+            <li>Production-ready iOS build</li>
+            <li>Submission and launch support</li>
+          </ul>
         </article>
-        <article class="portfolio-slot app-noizzle">
-          <strong>Noizzle</strong>
-          <span>Fast, Audio-based Puzzle Game App</span>
-          <div class="shot-strip">
-            <div class="shot">
-              <img src="assets/portfolio/noizzle-1.png" alt="Noizzle screenshot 1" loading="lazy" />
-            </div>
-            <div class="shot">
-              <img src="assets/portfolio/noizzle-2.PNG" alt="Noizzle screenshot 2" loading="lazy" />
-            </div>
-            <div class="shot">
-              <img src="assets/portfolio/noizzle-3.PNG" alt="Noizzle screenshot 3" loading="lazy" />
-            </div>
-          </div>
-          <a class="portfolio-link" href="mailto:brendanpinder0@gmail.com?subject=Noizzle%20Demo">Request demo</a>
+        <article class="outcome-card">
+          <h3>PWA/Web app -&gt; Native wrapper</h3>
+          <p>For teams who already have product momentum and need an iOS presence without rebuilding everything.</p>
+          <ul>
+            <li>Architecture fit review</li>
+            <li>Wrapper and native bridge setup</li>
+            <li>Store compliance and release</li>
+          </ul>
         </article>
-        <article class="portfolio-slot app-hyrdate">
-          <strong>Hydrate Gate</strong>
-          <span>Healthy Habit Forming App</span>
-          <div class="shot-strip">
-            <div class="shot">
-              <img src="assets/portfolio/hydrate-gate-1.png" alt="Hyrdate Gate screenshot 1" loading="lazy" />
-            </div>
-            <div class="shot">
-              <img src="assets/portfolio/hydrate-gate-2.png" alt="Hyrdate Gate screenshot 2" loading="lazy" />
-            </div>
-            <div class="shot">
-              <img src="assets/portfolio/hydrate-gate-3.png" alt="Hyrdate Gate screenshot 3" loading="lazy" />
-            </div>
-          </div>
-          <a class="portfolio-link" href="mailto:brendanpinder0@gmail.com?subject=Hyrdate%20Gate%20Demo">Request demo</a>
+        <article class="outcome-card">
+          <h3>Fix &amp; finish a half-built iOS app</h3>
+          <p>For projects that already exist but need someone to clean them up and actually get them shipped.</p>
+          <ul>
+            <li>Codebase cleanup sprint</li>
+            <li>Bug triage and stability fixes</li>
+            <li>TestFlight and App Store handoff</li>
+          </ul>
         </article>
       </div>
-      <p class="portfolio-note">
-        Restaurant Club:
-        <a href="https://apps.apple.com/us/app/restaurant-club/id6756309257" target="_blank" rel="noopener noreferrer">
-          https://apps.apple.com/us/app/restaurant-club/id6756309257
-        </a>
-      </p>
     </section>
 
-    <section class="section" id="inquiry">
-      <h2>Quick Inquiry</h2>
-      <p>Prefer to type the idea first? Go head and it'll go straight to my inbox, I ANSWER FAST!</p>
-      <div class="inquiry-wrap">
-        <form id="inquiry-form">
+    <section class="panel section" id="packages">
+      <div class="section-intro">
+        <img class="section-mark" src="/assets/i2a-logo.png" alt="Idea2Appstore logo" />
+        <h2>Packages</h2>
+      </div>
+      <p class="section-lede">Clear scopes, faster decisions, and pricing that maps better to early-stage launches.</p>
+      <div class="packages">
+        <article class="package">
+          <h3>Starter</h3>
+          <p class="price">~$1,000</p>
+          <p class="best-for">Best for: simple validation build, wrapper, or launch support.</p>
+          <ul>
+            <li>One clear deliverable or launch lane</li>
+            <li>Fast scope and feasibility review</li>
+            <li>Core build or wrapper implementation</li>
+            <li>One TestFlight cycle</li>
+            <li>App Store submission guidance</li>
+          </ul>
+          <button class="choose-package" type="button" data-package="Starter (~$1,000)">Choose this -&gt; Get quote</button>
+        </article>
+
+        <article class="package">
+          <h3>MVP</h3>
+          <p class="price">$3,000-5,000</p>
+          <p class="best-for">Best for: multi-screen product with a real launch target.</p>
+          <ul>
+            <li>Productized app architecture</li>
+            <li>2-3 feature flows</li>
+            <li>Weekly demo checkpoints</li>
+            <li>Usability and polish pass</li>
+            <li>TestFlight and App Store release</li>
+          </ul>
+          <button class="choose-package" type="button" data-package="MVP ($3,000-5,000)">Choose this -&gt; Get quote</button>
+        </article>
+
+        <article class="package">
+          <h3>Pro</h3>
+          <p class="price">$10,000+</p>
+          <p class="best-for">Best for: bigger roadmap, advanced integrations, and post-launch iteration.</p>
+          <ul>
+            <li>Custom roadmap and scope control</li>
+            <li>Complex integrations or native features</li>
+            <li>Performance optimization</li>
+            <li>Launch plus rapid iteration</li>
+            <li>Extended support window</li>
+          </ul>
+          <button class="choose-package" type="button" data-package="Pro ($10,000+)">Choose this -&gt; Get quote</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel section" id="how">
+      <h2>How It Works</h2>
+      <div class="steps">
+        <article class="step">
+          <span class="step-num">1</span>
+          <h3>Scope call (15 min)</h3>
+          <p>Define MVP, delivery path, and the fixed-quote recommendation.</p>
+        </article>
+        <article class="step">
+          <span class="step-num">2</span>
+          <h3>Build sprint</h3>
+          <p>Weekly demos, implementation, and TestFlight feedback loop.</p>
+        </article>
+        <article class="step">
+          <span class="step-num">3</span>
+          <h3>Launch</h3>
+          <p>App Store submission, review handling, and final fixes.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel section" id="portfolio">
+      <h2>Portfolio</h2>
+      <p class="section-lede">A few personal projects I’ve built and launched. I can share technical details and process in a consult.</p>
+      <div class="portfolio-grid">
+        <article class="portfolio-item">
+          <h3>Restaurant Club</h3>
+          <p>Social dining app. I built core UX flows, launch readiness, and App Store delivery in about 4 weeks.</p>
+          <div class="shots">
+            <div class="shot"><img src="/assets/portfolio/restaurant-club-1.jpeg" alt="Restaurant Club screenshot 1" loading="lazy" /></div>
+            <div class="shot"><img src="/assets/portfolio/restaurant-club-2.jpeg" alt="Restaurant Club screenshot 2" loading="lazy" /></div>
+            <div class="shot"><img src="/assets/portfolio/restaurant-club-3.jpeg" alt="Restaurant Club screenshot 3" loading="lazy" /></div>
+          </div>
+          <a class="project-link" href="https://apps.apple.com/us/app/restaurant-club/id6756309257" target="_blank" rel="noopener noreferrer">View on the App Store</a>
+        </article>
+
+        <article class="portfolio-item">
+          <h3>Noizzle</h3>
+          <p>Audio puzzle game concept. I shipped the gameplay loop, scoring flow, and iterative QA pass in around 3 weeks.</p>
+          <div class="shots">
+            <div class="shot"><img src="/assets/portfolio/noizzle-1.png" alt="Noizzle screenshot 1" loading="lazy" /></div>
+            <div class="shot"><img src="/assets/portfolio/noizzle-2.PNG" alt="Noizzle screenshot 2" loading="lazy" /></div>
+            <div class="shot"><img src="/assets/portfolio/noizzle-3.PNG" alt="Noizzle screenshot 3" loading="lazy" /></div>
+          </div>
+          <a class="project-link" href="mailto:brendanpinder0@gmail.com?subject=Noizzle%20Demo%20Request">Request demo details</a>
+        </article>
+
+        <article class="portfolio-item">
+          <h3>Hydrate Gate</h3>
+          <p>Habit and utility app. I built the tracking logic, settings flow, and a polished MVP in about 2 weeks.</p>
+          <div class="shots">
+            <div class="shot"><img src="/assets/portfolio/hydrate-gate-1.png" alt="Hydrate Gate screenshot 1" loading="lazy" /></div>
+            <div class="shot"><img src="/assets/portfolio/hydrate-gate-2.png" alt="Hydrate Gate screenshot 2" loading="lazy" /></div>
+            <div class="shot"><img src="/assets/portfolio/hydrate-gate-3.png" alt="Hydrate Gate screenshot 3" loading="lazy" /></div>
+          </div>
+          <a class="project-link" href="mailto:brendanpinder0@gmail.com?subject=Hydrate%20Gate%20Demo%20Request">Request demo details</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel section" id="faq">
+      <h2>FAQ</h2>
+      <div class="faq-list">
+        <details>
+          <summary>What does "starts at" include?</summary>
+          <p>
+            "Starts at" covers scoped delivery for the package baseline, including implementation, one TestFlight cycle,
+            and App Store submission support.
+          </p>
+        </details>
+        <details>
+          <summary>How fast can we launch?</summary>
+          <p>Most projects launch in 2-6 weeks depending on feature count, assets, and any third-party integrations.</p>
+        </details>
+        <details>
+          <summary>Do you handle App Store submission?</summary>
+          <p>Yes. I handle build prep, metadata checklist support, and submission flow through review.</p>
+        </details>
+        <details>
+          <summary>Can you work with my existing codebase?</summary>
+          <p>Yes. I can audit, stabilize, and continue from existing Swift or web-based code depending on its current state.</p>
+        </details>
+        <details>
+          <summary>What do you need from me to start?</summary>
+          <p>A clear goal, any existing assets or notes, and access to current code or docs is enough to scope quickly.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="panel section" id="quote">
+      <div class="section-intro">
+        <img class="section-mark" src="/assets/i2a-logo.png" alt="Idea2Appstore logo" />
+        <h2>Get a fixed quote in 1 business day.</h2>
+      </div>
+      <p class="section-lede">Use the form below and I’ll draft the quote request details cleanly. Free consult is still one click away if you’d rather talk first.</p>
+      <div class="quote-wrap">
+        <form id="quote-form">
+          <input type="hidden" id="selected-package" name="selected-package" value="" />
           <div class="form-grid">
             <div class="field">
               <label for="name">Name</label>
@@ -812,58 +1016,93 @@
               <input id="email" name="email" type="email" placeholder="you@email.com" required />
             </div>
             <div class="field">
-              <label for="project-type">Project Type</label>
+              <label for="project-type">Project type</label>
               <select id="project-type" name="project-type">
                 <option>New iOS app from scratch</option>
                 <option>PWA to native iOS</option>
                 <option>Swift translation/wrap</option>
                 <option>App Store launch support</option>
+                <option>Fix existing iOS app</option>
               </select>
             </div>
             <div class="field">
-              <label for="timeline">Target Timeline</label>
-              <input id="timeline" name="timeline" type="text" placeholder="e.g. MVP in 6-8 weeks" />
+              <label for="budget-range">Budget range</label>
+              <select id="budget-range" name="budget-range" required>
+                <option value="" selected disabled>Select budget</option>
+                <option>&lt;$1k</option>
+                <option>$1-3K</option>
+                <option>$3-10K</option>
+                <option>$10k+</option>
+              </select>
             </div>
             <div class="field full">
-              <label for="idea">Your App Idea</label>
-              <textarea id="idea" name="idea" placeholder="What are you building? Who is it for?"></textarea>
+              <label for="idea-links">Idea / links</label>
+              <textarea id="idea-links" name="idea-links" placeholder="Describe the app, target users, and any links/code references."></textarea>
             </div>
           </div>
-          <div class="form-actions">
-            <button class="secondary-btn" type="submit">Send Inquiry Draft</button>
-            <p class="small-print">This opens your email app with the details pre-filled.</p>
+          <div class="quote-actions">
+            <button class="submit-btn" type="submit">Get my quote</button>
+            <a class="btn btn-secondary" href="mailto:brendanpinder0@gmail.com?subject=Free%20Consult%20Request">Book free consult</a>
           </div>
         </form>
+        <div class="thanks" id="thanks-message">
+          Thanks - your quote request draft is ready in your email app. Want to talk live instead?
+          <a href="mailto:brendanpinder0@gmail.com?subject=Free%20Consult%20Request">Book a consult</a>.
+        </div>
       </div>
     </section>
+  </main>
 
-    <footer>
-      Ready to launch your iOS app? <a href="mailto:brendanpinder0@gmail.com">Book Your FREE Consult</a>
-    </footer>
-  </div>
+  <footer class="container">
+    <div class="footer-wrap">
+      <div class="footer-brand">
+        <img src="/assets/i2a-logo.png" alt="Idea2Appstore logo" />
+        <span>US-based • Fast response • Shipping-focused</span>
+      </div>
+      <div>
+        <a href="mailto:brendanpinder0@gmail.com">brendanpinder0@gmail.com</a> |
+        <a href="/">Home</a> |
+        <a href="/draft">Previous landing page</a>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    const form = document.getElementById("inquiry-form");
+    const chooseButtons = document.querySelectorAll(".choose-package");
+    const packageInput = document.getElementById("selected-package");
+    const quoteForm = document.getElementById("quote-form");
+    const thanksMessage = document.getElementById("thanks-message");
 
-    form.addEventListener("submit", function (event) {
+    chooseButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        packageInput.value = button.dataset.package || "";
+        quoteForm.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    quoteForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
       const name = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim();
       const projectType = document.getElementById("project-type").value.trim();
-      const timeline = document.getElementById("timeline").value.trim();
-      const idea = document.getElementById("idea").value.trim();
+      const budgetRange = document.getElementById("budget-range").value.trim();
+      const ideaLinks = document.getElementById("idea-links").value.trim();
+      const chosenPackage = packageInput.value.trim() || "Not selected";
 
-      const subject = "New Idea2Appstore Inquiry";
+      const subject = "Fixed Quote Request - Idea2Appstore";
       const body = [
         "Name: " + name,
         "Email: " + email,
         "Project Type: " + projectType,
-        "Target Timeline: " + (timeline || "Not specified"),
+        "Budget Range: " + budgetRange,
+        "Selected Package: " + chosenPackage,
         "",
-        "App Idea:",
-        idea || "Not provided"
+        "Idea / Links:",
+        ideaLinks || "Not provided"
       ].join("\n");
 
+      thanksMessage.style.display = "block";
       window.location.href =
         "mailto:brendanpinder0@gmail.com?subject=" +
         encodeURIComponent(subject) +

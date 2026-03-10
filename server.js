@@ -14,8 +14,7 @@ const BEER_TRACKER_FILE = path.join(ROOT_DIR, "austinbeertracker2026roadto1500.h
 const BEER_TRACKER_ADMIN_FILE = path.join(ROOT_DIR, "austinbeertracker2026roadto1500_current_count.html");
 
 const ADMIN_KEY = process.env.BEER_TRACKER_ADMIN_KEY || "";
-const PRIMARY_PORT = Number(process.env.PORT) || 8080;
-const FALLBACK_HTTP_PORT = 80;
+const HTTP_PORT = Number(process.env.PORT) || 3000;
 
 const hasDatabase = Boolean(process.env.DATABASE_URL);
 let pool = hasDatabase
@@ -198,6 +197,7 @@ app.get("/", (_, res) => res.sendFile(INDEX_FILE));
 app.get("/index.html", (_, res) => res.sendFile(INDEX_FILE));
 app.get("/draft", (_, res) => res.sendFile(DRAFT_FILE));
 app.get("/draft/", (_, res) => res.sendFile(DRAFT_FILE));
+app.get("/draft/index.html", (_, res) => res.sendFile(DRAFT_FILE));
 
 app.get("/austinbeertracker2026roadto1500", (_, res) => res.sendFile(BEER_TRACKER_FILE));
 app.get("/austinbeertracker2026roadto1500.html", (_, res) => res.sendFile(BEER_TRACKER_FILE));
@@ -215,19 +215,15 @@ app.use((_, res) => {
   res.status(404).send("Not found");
 });
 
-function listenOnPort(port, label) {
-  return new Promise((resolve) => {
+function listenOnPort(port) {
+  return new Promise((resolve, reject) => {
     const server = app.listen(port, "0.0.0.0", () => {
       // eslint-disable-next-line no-console
-      console.log(label + " listening on port " + port);
-      resolve(true);
+      console.log("HTTP listening on port " + port);
+      resolve(server);
     });
 
-    server.on("error", (error) => {
-      // eslint-disable-next-line no-console
-      console.warn("Could not open " + label + " on port " + port + ":", error.message);
-      resolve(false);
-    });
+    server.on("error", reject);
   });
 }
 
@@ -241,16 +237,7 @@ async function start() {
       // eslint-disable-next-line no-console
       console.warn("Database unavailable, using beer_stats.json fallback:", error.message);
     }
-
-    const primaryOk = await listenOnPort(PRIMARY_PORT, "Primary HTTP");
-    let fallbackOk = false;
-    if (PRIMARY_PORT !== FALLBACK_HTTP_PORT) {
-      fallbackOk = await listenOnPort(FALLBACK_HTTP_PORT, "Fallback HTTP");
-    }
-
-    if (!primaryOk && !fallbackOk) {
-      throw new Error("No HTTP listener could be started.");
-    }
+    await listenOnPort(HTTP_PORT);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error("Failed to start server:", error);

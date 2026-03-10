@@ -4,8 +4,8 @@ Landing pages + beer tracker for `idea2appstore.com`.
 
 ## Files
 
-- `index.html` - main landing page
-- `draft/index.html` - secondary draft landing page at `/draft`
+- `index.html` - main landing page at `/`
+- `draft/index.html` - previous landing page at `/draft`
 - `austinbeertracker2026roadto1500.html` - tracker page at `/austinbeertracker2026roadto1500`
 - `austinbeertracker2026roadto1500_current_count.html` - updater page at `/austinbeertracker2026roadto1500/current_count`
 - `beer_stats.json` - fallback stats source
@@ -21,7 +21,7 @@ npm install
 npm start
 ```
 
-Then open `http://localhost:8080`.
+Then open `http://localhost:3000`.
 
 ## Beer Tracker API
 
