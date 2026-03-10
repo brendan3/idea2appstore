@@ -151,8 +151,7 @@
     }
 
     .btn:hover,
-    .choose-package:hover,
-    .submit-btn:hover {
+    .choose-package:hover {
       transform: translateY(-1px);
     }
 
@@ -583,52 +582,9 @@
       padding: 0.88rem;
     }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.65rem;
-    }
-
-    .field {
-      display: grid;
-      gap: 0.3rem;
-    }
-
-    .field.full {
-      grid-column: 1 / -1;
-    }
-
-    .field label {
-      color: #6a39c0;
-      font-size: 0.8rem;
-      font-weight: 800;
-      letter-spacing: 0.01em;
-    }
-
-    .field input,
-    .field select,
-    .field textarea {
+    .fillout-embed {
       width: 100%;
-      border: 1px solid rgba(124, 77, 203, 0.2);
-      background: rgba(255, 255, 255, 0.96);
-      border-radius: 10px;
-      color: #3b246d;
-      font-family: inherit;
-      font-size: 0.89rem;
-      padding: 0.68rem 0.76rem;
-    }
-
-    .field textarea {
-      min-height: 132px;
-      resize: vertical;
-      line-height: 1.45;
-    }
-
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus {
-      outline: 2px solid rgba(168, 85, 247, 0.24);
-      border-color: rgba(126, 58, 242, 0.5);
+      min-height: 500px;
     }
 
     .quote-actions {
@@ -637,37 +593,6 @@
       gap: 0.55rem;
       flex-wrap: wrap;
       align-items: center;
-    }
-
-    .submit-btn {
-      min-height: 44px;
-      border: none;
-      border-radius: 10px;
-      padding: 0.66rem 1rem;
-      color: #fff;
-      background: linear-gradient(132deg, var(--primary), var(--primary-2));
-      font-family: "Sora", sans-serif;
-      font-weight: 700;
-      font-size: 0.83rem;
-      cursor: pointer;
-      box-shadow: 0 14px 30px rgba(126, 58, 242, 0.26);
-    }
-
-    .thanks {
-      display: none;
-      margin-top: 0.7rem;
-      border-radius: 10px;
-      border: 1px solid rgba(103, 191, 144, 0.26);
-      background: rgba(31, 183, 109, 0.11);
-      color: #0f6b43;
-      padding: 0.64rem 0.72rem;
-      font-size: 0.86rem;
-      font-weight: 800;
-    }
-
-    .thanks a {
-      color: #125d3e;
-      text-underline-offset: 3px;
     }
 
     footer {
@@ -735,8 +660,7 @@
       .cards-3,
       .packages,
       .steps,
-      .portfolio-grid,
-      .form-grid {
+      .portfolio-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1002,52 +926,18 @@
         <img class="section-mark" src="/assets/i2a-logo.png" alt="Idea2Appstore logo" />
         <h2>Get a fixed quote in 1 business day.</h2>
       </div>
-      <p class="section-lede">Use the form below and I’ll draft the quote request details cleanly. Free consult is still one click away if you’d rather talk first.</p>
+      <p class="section-lede">Use the live form below to send the quote request directly. Free consult is still one click away if you’d rather talk first.</p>
       <div class="quote-wrap">
-        <form id="quote-form">
-          <input type="hidden" id="selected-package" name="selected-package" value="" />
-          <div class="form-grid">
-            <div class="field">
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" placeholder="Your name" required />
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" placeholder="you@email.com" required />
-            </div>
-            <div class="field">
-              <label for="project-type">Project type</label>
-              <select id="project-type" name="project-type">
-                <option>New iOS app from scratch</option>
-                <option>PWA to native iOS</option>
-                <option>Swift translation/wrap</option>
-                <option>App Store launch support</option>
-                <option>Fix existing iOS app</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="budget-range">Budget range</label>
-              <select id="budget-range" name="budget-range" required>
-                <option value="" selected disabled>Select budget</option>
-                <option>&lt;$1k</option>
-                <option>$1-3K</option>
-                <option>$3-10K</option>
-                <option>$10k+</option>
-              </select>
-            </div>
-            <div class="field full">
-              <label for="idea-links">Idea / links</label>
-              <textarea id="idea-links" name="idea-links" placeholder="Describe the app, target users, and any links/code references."></textarea>
-            </div>
-          </div>
-          <div class="quote-actions">
-            <button class="submit-btn" type="submit">Get my quote</button>
-            <a class="btn btn-secondary" href="mailto:brendanpinder0@gmail.com?subject=Free%20Consult%20Request">Book free consult</a>
-          </div>
-        </form>
-        <div class="thanks" id="thanks-message">
-          Thanks - your quote request draft is ready in your email app. Want to talk live instead?
-          <a href="mailto:brendanpinder0@gmail.com?subject=Free%20Consult%20Request">Book a consult</a>.
+        <div
+          id="quote-form"
+          class="fillout-embed"
+          data-fillout-id="cxVXeiBqGeus"
+          data-fillout-embed-type="standard"
+          data-fillout-inherit-parameters
+          data-fillout-dynamic-resize
+        ></div>
+        <div class="quote-actions">
+          <a class="btn btn-secondary" href="mailto:brendanpinder0@gmail.com?subject=Free%20Consult%20Request">Book free consult</a>
         </div>
       </div>
     </section>
@@ -1067,47 +957,15 @@
     </div>
   </footer>
 
+  <script src="https://server.fillout.com/embed/v1/"></script>
   <script>
     const chooseButtons = document.querySelectorAll(".choose-package");
-    const packageInput = document.getElementById("selected-package");
     const quoteForm = document.getElementById("quote-form");
-    const thanksMessage = document.getElementById("thanks-message");
 
     chooseButtons.forEach(function (button) {
       button.addEventListener("click", function () {
-        packageInput.value = button.dataset.package || "";
         quoteForm.scrollIntoView({ behavior: "smooth", block: "start" });
       });
-    });
-
-    quoteForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const projectType = document.getElementById("project-type").value.trim();
-      const budgetRange = document.getElementById("budget-range").value.trim();
-      const ideaLinks = document.getElementById("idea-links").value.trim();
-      const chosenPackage = packageInput.value.trim() || "Not selected";
-
-      const subject = "Fixed Quote Request - Idea2Appstore";
-      const body = [
-        "Name: " + name,
-        "Email: " + email,
-        "Project Type: " + projectType,
-        "Budget Range: " + budgetRange,
-        "Selected Package: " + chosenPackage,
-        "",
-        "Idea / Links:",
-        ideaLinks || "Not provided"
-      ].join("\n");
-
-      thanksMessage.style.display = "block";
-      window.location.href =
-        "mailto:brendanpinder0@gmail.com?subject=" +
-        encodeURIComponent(subject) +
-        "&body=" +
-        encodeURIComponent(body);
     });
   </script>
 </body>
