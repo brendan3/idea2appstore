@@ -216,6 +216,44 @@ To change the photo, replace assets/beertracker/austin.jpg with a new image and 
       font-weight: 800;
     }
 
+    .venmo-cta {
+      margin: 0.85rem 0 0;
+      display: grid;
+      justify-items: center;
+      gap: 0.35rem;
+    }
+
+    .venmo-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.72rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(17, 73, 166, 0.16);
+      background: linear-gradient(135deg, #1680ff, #11a65a);
+      box-shadow: 0 16px 28px rgba(18, 75, 170, 0.18);
+      color: #ffffff;
+      font-family: "Sora", sans-serif;
+      font-size: 0.87rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .venmo-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 32px rgba(18, 75, 170, 0.24);
+    }
+
+    .venmo-note {
+      margin: 0;
+      color: #4f5e85;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
     .error {
       margin-top: 0.9rem;
       border-radius: 10px;
@@ -282,6 +320,15 @@ To change the photo, replace assets/beertracker/austin.jpg with a new image and 
       </div>
 
       <p class="fun-note" id="fun-note">Loading hydration intelligence...</p>
+      <div class="venmo-cta">
+        <a
+          class="venmo-link"
+          href="https://account.venmo.com/u/Austin-Moyer-3"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Buy Austin his next beer</a>
+        <p class="venmo-note">Opens Austin&apos;s Venmo profile. $5 suggested.</p>
+      </div>
       <div class="photo-wrap">
         <img src="/assets/beertracker/austin.jpg" alt="Austin enjoying a Bud Light" />
       </div>
